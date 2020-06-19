@@ -5,10 +5,11 @@ import cn.javak.pojo.Blog;
 import cn.javak.pojo.BlogTagKey;
 import cn.javak.pojo.Comment;
 import cn.javak.pojo.User;
-import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
