@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.javak.mapper.BlogMapper">
+  <resultMap id="BaseResultMap" type="cn.javak.pojo.Blog">
+    <id column="blog_id" jdbcType="INTEGER" property="blogId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="topic" jdbcType="VARCHAR" property="topic" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="star_num" jdbcType="INTEGER" property="starNum" />
+    <result column="collection_num" jdbcType="INTEGER" property="collectionNum" />
+    <result column="click_num" jdbcType="INTEGER" property="clickNum" />
+    <result column="comment_num" jdbcType="INTEGER" property="commentNum" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    blog_id, user_id, topic, content, star_num, collection_num, click_num, comment_num, 
+    create_time
+  </sql>
+  <sql id="Home">
+    user_id, blog_id, topic, star_num, collection_num, click_num, comment_num, create_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from blog
+    where blog_id = #{blogId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from blog
+    where blog_id = #{blogId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="blog_id" keyProperty="blogId" parameterType="cn.javak.pojo.Blog" useGeneratedKeys="true">
+    insert into blog (user_id, topic, content, 
+      star_num, collection_num, click_num, 
+      comment_num, create_time)
+    values (#{userId,jdbcType=INTEGER}, #{topic,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, 
+      #{starNum,jdbcType=INTEGER}, #{collectionNum,jdbcType=INTEGER}, #{clickNum,jdbcType=INTEGER}, 
+      #{commentNum,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="blog_id" keyProperty="blogId" parameterType="cn.javak.pojo.Blog" useGeneratedKeys="true">
+    insert into blog
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="topic != null">
+        topic,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="starNum != null">
+        star_num,
+      </if>
+      <if test="collectionNum != null">
+        collection_num,
+      </if>
+      <if test="clickNum != null">
+        click_num,
+      </if>
+      <if test="commentNum != null">
+        comment_num,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="topic != null">
+        #{topic,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="starNum != null">
+        #{starNum,jdbcType=INTEGER},
+      </if>
+      <if test="collectionNum != null">
+        #{collectionNum,jdbcType=INTEGER},
+      </if>
+      <if test="clickNum != null">
+        #{clickNum,jdbcType=INTEGER},
+      </if>
+      <if test="commentNum != null">
+        #{commentNum,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.javak.pojo.Blog">
+    update blog
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="topic != null">
+        topic = #{topic,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="starNum != null">
+        star_num = #{starNum,jdbcType=INTEGER},
+      </if>
+      <if test="collectionNum != null">
+        collection_num = #{collectionNum,jdbcType=INTEGER},
+      </if>
+      <if test="clickNum != null">
+        click_num = #{clickNum,jdbcType=INTEGER},
+      </if>
+      <if test="commentNum != null">
+        comment_num = #{commentNum,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where blog_id = #{blogId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.javak.pojo.Blog">
+    update blog
+    set user_id = #{userId,jdbcType=INTEGER},
+      topic = #{topic,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      star_num = #{starNum,jdbcType=INTEGER},
+      collection_num = #{collectionNum,jdbcType=INTEGER},
+      click_num = #{clickNum,jdbcType=INTEGER},
+      comment_num = #{commentNum,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where blog_id = #{blogId,jdbcType=INTEGER}
+  </update>
+  <select id="select" resultMap="BaseResultMap">
+    select
+    <include refid="Home" />
+    from blog
+    order by blog.create_time desc limit 0, 15;
+  </select>
+  <select id="selectHot" resultMap="BaseResultMap">
+    select
+    <include refid="Home" />
+    from blog
+    order by blog.click_num desc limit 0, 15;
+  </select>
+  <select id="selectTopping" resultMap="BaseResultMap">
+    select b.blog_id, topic, click_num, comment_num
+    from blog b join blog_tag bt on (b.blog_id = bt.blog_id) where bt.tag_id = 1;
+  </select>
+  <select id="selectByUserId" resultMap="BaseResultMap">
+    select blog_id, topic, click_num, comment_num, create_time
+    from blog
+    where user_id = #{userId, jdbcType=INTEGER}
+    order by create_time desc;
+  </select>
+</mapper>
