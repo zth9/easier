@@ -209,6 +209,11 @@ public class BlogController {
         return RespBean.ok("可编辑", selBlog);
     }
 
+    /**
+     * 根据关键字 like 查询blog表中的topic字段
+     * @param keyWord
+     * @return
+     */
     @GetMapping("search/{keyWord}")
     public RespBean search(@PathVariable("keyWord") String keyWord){
         return RespBean.error("服务暂未开放");
