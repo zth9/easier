@@ -21,7 +21,6 @@ public class TokenUtil {
      */
     public static Integer getTokenUserId() {
         String token = getRequest().getHeader("token");// 从 http 请求头中取出 token
-        System.out.println(token);
         String userId = JWT.decode(token).getAudience().get(0);
         if (userId == null){
             return null;
