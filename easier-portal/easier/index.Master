@@ -1,0 +1,495 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="index.master.cs" Inherits="esayer.views.index" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css" />
+
+    <script src="http://at.alicdn.com/t/font_1839202_2rbnbh0ykd7.js"></script>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/popper.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/sweetalert.min.js"></script>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <style type="text/css">
+        .icon {
+            width: 1.25em;
+            height: 1.25em;
+            vertical-align: -0.15em;
+            fill: currentColor;
+            overflow: hidden;
+            justify-content: center;
+            align-content: center;
+        }
+
+        body {
+            padding: 0;
+            margin: 0;
+            height: 100vh;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-color: #f4f5f7;
+        }
+
+        #form1 {
+        }
+
+        #header {
+            background-color: #fff;
+            height: auto;
+            max-width: 100%;
+            height: 68px;
+            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.08);
+            display: flex;
+            justify-items: center;
+        }
+
+        #header-nav {
+            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.08);
+        }
+
+        #main {
+            margin-top: 78px;
+            background-color: white;
+            max-width: 1140px;
+            display:flex;
+            flex-direction:column;
+
+        }
+        #footer{
+                border-top: 1px solid #e2e2e2;
+        }
+
+        .nopadding {
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        .nav-a {
+            color: #8590a6;
+            display: inline-block;
+            border-bottom: 3px solid rgba(0, 0, 0, 0);
+        }
+
+            .nav-a:hover {
+                color: black;
+                border-radius: 0 !important;
+                border-bottom: 3px solid #007bff;
+            }
+
+        .nav-active {
+            border-bottom: 3px solid #007bff;
+            border-radius: 0 !important;
+        }
+
+        #cur-user {
+            box-shadow: none;
+        }
+
+            #cur-user:hover {
+                background-color: #f4f5f7
+            }
+
+
+        .dropdown-menu:hover {
+            background-color: white;
+            transition: all .2s;
+        }
+
+        .dropdown-item:hover {
+            background-color: #f4f5f7;
+            transition: all .2s;
+        }
+
+        #user-name {
+            padding-right: 10px;
+        }
+
+        #tools-bar {
+            min-height: 68px;
+            justify-content: space-between;
+            align-items:center;
+        }
+        .bg-loader{
+            border-radius:30px;
+            background-color:black;
+            opacity: 0.5;
+            border:none;
+        }
+        html .loader,
+        body .loader {
+            height: 50px;
+            width: 50px;
+            position: relative;
+        }
+            html .loader::after, html .loader::before,
+            body .loader::after,
+            body .loader::before {
+                content: "";
+                width: 50px;
+                height: 50px;
+                position: absolute;
+                border: solid 8px transparent;
+                border-radius: 50%;
+                -webkit-animation: wiggle 1.4s linear infinite;
+                animation: wiggle 1.4s linear infinite;
+            }
+
+            html .loader::before,
+            body .loader::before {
+                border-top-color: #4285f4;
+                border-bottom-color: #34a853;
+            }
+
+            html .loader::after,
+            body .loader::after {
+                border-left-color: #fbbc05;
+                border-right-color: #ea4335;
+                -webkit-animation-delay: 0.7s;
+                animation-delay: 0.7s;
+            }
+
+        @-webkit-keyframes wiggle {
+            0% {
+                -webkit-transform: rotate(0deg) scale(1);
+                transform: rotate(0deg) scale(1);
+            }
+
+            50% {
+                -webkit-transform: rotate(180deg) scale(0.5);
+                transform: rotate(180deg) scale(0.5);
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg) scale(1);
+                transform: rotate(360deg) scale(1);
+            }
+        }
+
+        @keyframes wiggle {
+            0% {
+                -webkit-transform: rotate(0deg) scale(1);
+                transform: rotate(0deg) scale(1);
+            }
+
+            50% {
+                -webkit-transform: rotate(180deg) scale(0.5);
+                transform: rotate(180deg) scale(0.5);
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg) scale(1);
+                transform: rotate(360deg) scale(1);
+            }
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div id="header" class="fixed-top">
+            <div class="nopadding container">
+                <nav class="nopadding navbar navbar-expand-md bg-white navbar-header" style="padding:0;height: 68px;">
+                    <a class="navbar-brand" href="home.aspx">Blog</a>
+                    <span id="title" class="navbar-brand navbar-toggler" href="#">
+                        <svg class="icon" aria-hidden="true">
+                            <use xlink:href="#icon-guangchang"></use>
+                        </svg>
+                        <span class="text-center">
+
+                        </span>
+                    </span>
+                    <button style="margin:16.5px 0;" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu">
+                        <svg class="icon" aria-hidden="true">
+                            <use xlink:href="#icon-caidan"></use>
+                        </svg>
+                    </button>
+                    <div style="justify-content: space-between;" class="collapse navbar-collapse text-center bg-white" id="menu">
+                        <ul id="nav-list" class="nav navbar-nav nav-pills">
+                            <li class="nav-item">
+                                <a class="nav-link nav-a navbar-brand" href="home.aspx">
+                                    <svg class="icon" aria-hidden="true">
+                                        <use xlink:href="#icon-shouye"></use>
+                                    </svg>
+                                    首页
+                                </a>
+                            </li>
+                            <li id="blog" class="nav-item">
+                                <a class="nav-link nav-a navbar-brand" href="#">
+                                    <svg class="icon" aria-hidden="true">
+                                        <use xlink:href="#icon-biji"></use>
+                                    </svg>
+                                    发布Blog
+                                </a>
+                            </li>
+                            <li id="mine" class="nav-item d-none">
+                                <a class="nav-link nav-a navbar-brand" href="mine.aspx">
+                                    <svg class="icon" aria-hidden="true">
+                                        <use xlink:href="#icon-gerenzhongxin"></use>
+                                    </svg>
+                                    个人中心
+                                </a>
+                            </li>
+                        </ul>
+                        <ul id="login-bar" class="nav navbar-nav d-none">
+                            <li class="nav-item">
+                                <a class="nav-link nav-a navbar-brand" href="signup.aspx">
+                                    <svg class="icon" aria-hidden="true">
+                                        <use xlink:href="#icon-zhuce1"></use>
+                                    </svg>
+                                    注册
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-a nav-link navbar-brand" href="login.aspx">
+                                    <svg class="icon" aria-hidden="true">
+                                        <use xlink:href="#icon-denglu1"></use>
+                                    </svg>
+                                    登录
+                                </a>
+                            </li>
+                        </ul>
+                        <ul id="user-bar" class="nav navbar-nav d-none">
+                            <li class="nav-item">
+                                <a id="cur-user" href="#" class="nav-link btn" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"">
+                                    <span id="user-name" class="text-dark">用户</span>
+                                    <img src="http://123.57.236.58/easier/user/avatar/1.png" width="50px" height="50px" />
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right text-center" style="min-width: 8rem;" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="mine.aspx?edit">
+                                        <svg class="icon" aria-hidden="true">
+                                            <use xlink:href="#icon-B"></use>
+                                        </svg>
+                                        编辑资料
+                                    </a>
+                                    <a class="dropdown-item" href="mine.aspx?adv">
+                                        <svg class="icon" aria-hidden="true">
+                                            <use xlink:href="#icon-tongzhi"></use>
+                                        </svg>
+                                        通知信息
+                                    </a>
+                                    <a class="dropdown-item" href="mine.aspx?blog">
+                                        <svg class="icon" aria-hidden="true">
+                                            <use xlink:href="#icon-guanli"></use>
+                                        </svg>
+                                        博客管理
+                                    </a>
+                                    <div class="dropdown-divider"></div>
+                                    <a id="logout" class="dropdown-item" href="#">
+                                        <svg class="icon" aria-hidden="true">
+                                            <use xlink:href="#icon-tuichu"></use>
+                                        </svg>
+                                        退出
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+        <div id="main" class="container">
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder2" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+        <div id="footer" class="container flex-column justify-content-center mt-3 mb-3">
+            <p class="text-center">
+                Copyright © 2019-2020 行之则易 
+                <a class="btn-link" target="_blank" href="https://blog.csdn.net/weixin_43544077">
+                    CSDN
+                    <svg class="icon" style="font-size:13px" aria-hidden="true">
+                        <use xlink:href="#icon-csdn"></use>
+                    </svg>
+                </a>
+                <a class="btn-link" target="_blank" href="https://github.com/Tian90coder/easier">
+                    Github
+                    <svg class="icon" style="font-size:13px" aria-hidden="true">
+                        <use xlink:href="#icon-github"></use>
+                    </svg>
+                </a>
+            </p>
+            <p class="text-center"><a href="http://www.beian.miit.gov.cn/" target="_blank"  class="btn-link">豫ICP备20002051号-1	</a> </p>
+        </div>
+    </form>
+    <script type="text/javascript">
+        url = function (i) {
+            //return "http://123.57.236.58:8080/easier/" + i;
+            return "http://localhost:8888/easier/" + i;
+        };
+        //重获token
+        getToken = function () {
+            var user = localStorage.getItem("user");
+            if (null == user) {
+                window.location.replace("login.aspx");
+            }
+            var username = JSON.parse(user).username;
+            var password = JSON.parse(user).password;
+            //ajax
+            $.ajax({
+                type: 'post',
+                url: url("login"),
+                cache: false,
+                dataType: 'json',
+                data: {
+                    username: username,
+                    password: password
+                },
+                beforeSend: function () {
+                },
+                success: function (data) {
+                    var res = data;
+                    switch (res.status) {
+                        //登陆成功
+                        case 200:
+                            //将用户信息进行本地存储
+                            var storage = window.localStorage;
+                            //设置用户信息到本地
+                            storage.removeItem("user")
+                            storage.setItem("user", JSON.stringify(res.obj.user));
+                            //设置token
+                            storage.removeItem("token")
+                            var token = res.obj.token
+                            storage.setItem("token", token);
+                            //刷新当前页面
+                            window.location.reload();
+                            break;
+                        case 500:
+                            console.log("出错啦")
+                            break;
+                    }
+
+                }
+            });
+        }
+        //绑定提示框样式
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+        //获取格式化时间
+        function fmtDate(data, format) {
+            var year = data.getFullYear();  //获取年
+            var month = data.getMonth() + 1;
+            month = month.toString().length == 1 ? ("0" + month) : month;    //获取月
+            var day = data.getDate()
+            day = day.toString().length == 1 ? ("0" + day) : day; //获取日
+            var hours = data.getHours()
+            hours = hours.toString().length == 1 ? ("0" + hours) : hours;
+            var minutes = data.getMinutes()
+            minutes = minutes.toString().length == 1 ? ("0" + minutes) : minutes;
+            var seconds = data.getSeconds()
+            seconds = seconds.toString().length == 1 ? ("0" + seconds) : seconds;
+            switch (format) {
+                case "date": return year + "/" + month + "/" + day;
+                case "time": return hours + ":" + minutes + ":" + seconds;
+                case "datetime": return year + "/" + month + "/" + day + " " + hours + ":" + minutes + ":" + seconds;
+            }
+            time = year + "/" + month + "/" + day + " " + hours + ":" + minutes + ":" + seconds;
+            return time;
+        }
+
+        //获取时间差
+        function getDateDiff(data) {
+            var dateTimeStamp = Date.parse(data)
+            var minute = 1000 * 60;
+            var hour = minute * 60;
+            var day = hour * 24;
+            var halfamonth = day * 15;
+            var month = day * 30;
+            var now = new Date().getTime();
+            var diffValue = now - dateTimeStamp;
+            if (diffValue < 0) {
+                //若日期不符则弹窗口告之,结束日期不能小于开始日期！
+            }
+            var monthC = diffValue / month;
+            var weekC = diffValue / (7 * day);
+            var dayC = diffValue / day;
+            var hourC = diffValue / hour;
+            var minC = diffValue / minute;
+            if (dayC > 7) {
+                result = fmtDate(data, "date")
+            }
+            else if (dayC >= 7) {
+                result = parseInt(weekC) + "周前";
+            }
+            else if (dayC >= 1) {
+                result = parseInt(dayC) + "天前";
+            }
+            else if (hourC >= 1) {
+                result = parseInt(hourC) + "小时前";
+            }
+            else if (minC >= 1) {
+                result =  parseInt(minC) + "分钟前";
+            } else
+                result = "刚刚";
+            return result;
+        }
+        $(function () {
+            //加载用户信息
+            var user = JSON.parse(localStorage.getItem("user"));
+            if (user != null) {
+                $("#user-bar").removeClass("d-none");
+
+                $("#user-bar span").text(user.nickName);
+
+                $("#user-bar img").attr("src", user.headPic);
+
+                $("#mine").removeClass("d-none");
+            } else {
+                $("#login-bar").removeClass("d-none");
+            }
+            //绑定Blog,未登录不允许发布
+            $("#blog").click(function () {
+                if (null == localStorage.getItem("user")) {
+                    swal({
+                        title: "尚未登陆",
+                        text: "正在前往登录页...",
+                        icon: "error",
+                        buttons: false,
+                        timer: 1500,
+                    }).then(function () {
+                        window.location.replace("login.aspx")
+                    });
+                } else {
+                    window.location.replace("release.aspx")
+                }
+            })
+            //登出
+            $("#logout").click(function () {
+                var user = localStorage.getItem("user");
+                if (null != user) {
+                    swal({
+                        title: "确定要退出登录么?",
+                        text: "  ",
+                        icon: "warning",
+                        buttons: {
+                            cancel: "取消",
+                            confirm: "退出",
+                        },
+                        dangerMode: true,
+                    }).then((willDelete) => {
+                        if (willDelete) {
+                            //todo 调用logout接口
+                            localStorage.removeItem("user");
+                            localStorage.removeItem("token");
+                            swal({
+                                title: "退出成功",
+                                text: " ",
+                                icon: "success",
+                                buttons: false,
+                                timer: 1000,
+                            }).then(function () {
+                                window.location.replace("home.aspx")
+                            });
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
