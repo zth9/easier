@@ -208,4 +208,9 @@ public class BlogController {
 
         return RespBean.ok("可编辑", selBlog);
     }
+
+    @GetMapping("search/{keyWord}")
+    public RespBean search(@PathVariable("keyWord") String keyWord){
+        return RespBean.error("服务暂未开放");
+    }
 }
