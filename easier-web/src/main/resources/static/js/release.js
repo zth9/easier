@@ -1,4 +1,4 @@
-$(function() {
+$(function () {
 	//判断是否登录
 	if (null == localStorage.getItem("user")) {
 		swal({
@@ -7,7 +7,7 @@ $(function() {
 			icon: "error",
 			buttons: false,
 			timer: 1200,
-		}).then(function() {
+		}).then(function () {
 			window.location.replace("login.html")
 		});
 	}
@@ -32,12 +32,12 @@ $(function() {
 				url: url("blog/edit/" + blogId),
 				cache: false,
 				dataType: 'json',
-				beforeSend: function(req) {
+				beforeSend: function (req) {
 					//设置token
 					req.setRequestHeader("token", localStorage.getItem("token"));
 					$('#loadmodal').modal('show');
 				},
-				success: function(data) {
+				success: function (data) {
 					var res = data;
 					switch (res.status) {
 						case 200:
@@ -54,7 +54,7 @@ $(function() {
 								case "tokenError":
 									getToken();
 									break;
-									//请求驳回
+								//请求驳回
 								case "reject":
 
 									break;
@@ -70,17 +70,17 @@ $(function() {
 					}
 
 				},
-				complete: function() {
+				complete: function () {
 					console.log("执行完成");
 
 					//完美关闭模态框
 					$('#loadmodal').modal('hide');
-					$('#loadmodal').on('shown.bs.modal', function() {
+					$('#loadmodal').on('shown.bs.modal', function () {
 						console.log("完全可见");
 						$('#loadmodal').modal('hide');
 					});
 				},
-				error: function() {
+				error: function () {
 					swal({
 						title: "服务器繁忙",
 						text: "请稍后重试",
@@ -93,7 +93,7 @@ $(function() {
 		}
 	}
 	//发布事件
-	$("#releastBtn").click(function() {
+	$("#releastBtn").click(function () {
 		console.log("开始发布");
 		//校验标题&内容
 		var title = $("#title-content").val();
@@ -122,7 +122,7 @@ $(function() {
 			}
 		}
 		var filterHtml = editor.txt.html();
-		var content = filterXSS(filterHtml); // 此处进行 xss 攻击过滤
+		var content = filterXSS(filterHtml);  // 此处进行 xss 攻击过滤
 		//ajax发送blog
 		$.ajax({
 			type: 'post',
@@ -135,12 +135,12 @@ $(function() {
 				topic: title,
 				content: content
 			},
-			beforeSend: function(req) {
+			beforeSend: function (req) {
 				//设置token
 				req.setRequestHeader("token", localStorage.getItem("token"));
 				$('#loadmodal').modal('show');
 			},
-			success: function(data) {
+			success: function (data) {
 				var res = data;
 				switch (res.status) {
 					//发布成功
@@ -152,7 +152,7 @@ $(function() {
 							buttons: false,
 							timer: 800,
 						});
-						setInterval(function() {
+						setInterval(function () {
 							window.location.replace("home.html")
 						}, 800);
 						break;
@@ -162,17 +162,17 @@ $(function() {
 				}
 
 			},
-			complete: function() {
+			complete: function () {
 				console.log("执行完成");
 				$("#ContentPlaceHolder1_submit").attr('disabled', false);
 
 				//完美关闭模态框
 				$('#loadmodal').modal('hide');
-				$('#loadmodal').on('shown.bs.modal', function() {
+				$('#loadmodal').on('shown.bs.modal', function () {
 					$('#loadmodal').modal('hide');
 				});
 			},
-			error: function() {
+			error: function () {
 				swal({
 					title: "服务器繁忙",
 					text: "请稍后重试",

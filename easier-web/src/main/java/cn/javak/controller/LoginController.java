@@ -52,10 +52,6 @@ public class LoginController {
         String token = tokenService.getToken(resUser);
         resMap.put("token", token);
 
-        Cookie cookie = new Cookie("token", token);
-        cookie.setPath("/");
-        response.addCookie(cookie);
-
         return RespBean.ok("登陆成功", resMap);
     }
 }

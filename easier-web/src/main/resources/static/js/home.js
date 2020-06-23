@@ -1,4 +1,4 @@
-$(function() {
+$(function () {
 	//用来标注当前菜单项
 	$("#nav-list li:eq(0) a").addClass("nav-active");
 
@@ -11,7 +11,7 @@ $(function() {
 		$("#goRelease").removeClass("d-none");
 	}
 	//加载Blog
-	loadBlog = function() {
+	loadBlog = function () {
 		var rule = 1;
 		var userRule = localStorage.getItem("rule");
 		if (userRule != null) {
@@ -19,7 +19,7 @@ $(function() {
 		}
 		if (rule == 1) {
 			$("#timeBtn").addClass("text-success");
-		} else if (rule == 2) {
+		} else if (rule == 2){
 			$("#hotBtn").addClass("text-success");
 		}
 		$.ajax({
@@ -30,11 +30,11 @@ $(function() {
 			data: {
 				rule: rule,
 			},
-			beforeSend: function() {
+			beforeSend: function () {
 				//动画
 				$('#loadmodal').modal('show')
 			},
-			success: function(data) {
+			success: function (data) {
 				var res = data;
 				switch (res.status) {
 					//发布成功
@@ -48,29 +48,18 @@ $(function() {
 							blogList[blog].createTime = getDateDiff(new Date(javaDate));
 							var li = $('<li class="list-group-item"></li>');
 							var mainDiv = $('<div class="d-flex align-items-center"></div>');
-							mainDiv.append('<div><a href="user.html?' + blogList[blog].userId + '" ><img src ="' + blogList[blog].headPic +
-								'" width = "45px" height = "45px" /></a ></div>');
+							mainDiv.append('<div><a href="user.html?' + blogList[blog].userId + '" ><img src ="' + blogList[blog].headPic + '" width = "45px" height = "45px" /></a ></div>');
 							var div1 = $('<div class="flex-grow-1"></div>');
 							//根据不同类型文章,设定不同显示颜色标题
 							if (blogList[blog].tagId == 1) {
 								//置顶文章
-								div1.append('<div><a class="text-danger" href="blog.html?' + blogList[blog].blogId + '">' + blogList[
-									blog].topic + '</a></div>')
+								div1.append('<div><a class="text-danger" href="blog.html?' + blogList[blog].blogId + '">' + blogList[blog].topic + '</a></div>')
 							} else {
-								div1.append('<div><a class="text-dark" href="blog.html?' + blogList[blog].blogId + '">' + blogList[
-									blog].topic + '</a></div>')
+								div1.append('<div><a class="text-dark" href="blog.html?' + blogList[blog].blogId + '">' + blogList[blog].topic + '</a></div>')
 							}
 
 
-							div1.append(
-								'<div class="d-flex justify-content-between  flex-column flex-sm-row"><div class="d-flex align-items-center"><a class="text-info mr-2 text-decoration-none" href="user.html?' +
-								blogList[blog].userId + '">' + blogList[blog].nickName +
-								'</a><svg class="icon" aria-hidden="true"><use xlink:href="#icon-dingshi"></use></svg><span class=" bg-light rounded">' +
-								blogList[blog].createTime +
-								'</span></div><div class="d-flex  justify-content-end"><div class="d-flex align-items-center  mr-2"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-chakan"></use></svg>' +
-								blogList[blog].clickNum +
-								'</div><div class="d-flex align-items-center"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-pinglun"></use></svg>' +
-								blogList[blog].commentNum + '</div></div></div>');
+							div1.append('<div class="d-flex justify-content-between  flex-column flex-sm-row"><div class="d-flex align-items-center"><a class="text-info mr-2 text-decoration-none" href="user.html?' + blogList[blog].userId + '">' + blogList[blog].nickName + '</a><svg class="icon" aria-hidden="true"><use xlink:href="#icon-dingshi"></use></svg><span class=" bg-light rounded">' + blogList[blog].createTime + '</span></div><div class="d-flex  justify-content-end"><div class="d-flex align-items-center  mr-2"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-chakan"></use></svg>' + blogList[blog].clickNum + '</div><div class="d-flex align-items-center"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-pinglun"></use></svg>' + blogList[blog].commentNum + '</div></div></div>');
 							mainDiv.append(div1);
 							li.append(mainDiv);
 
@@ -86,20 +75,14 @@ $(function() {
 							data: {
 
 							},
-							success: function(data) {
+							success: function (data) {
 								var res = data;
 								switch (res.status) {
 									//加载公告成功
 									case 200:
 										var toppingList = res.obj;
 										for (var i in toppingList) {
-											$("#topping").append(
-												'<li class="list-group-item border-left-0 border-right-0 d-flex"><div class="col-8 p-0"><a class="text-decoration-none" href="blog.html?' +
-												toppingList[i].blogId + '">' + toppingList[i].topic +
-												'</a></div><div class="col-4 p-0 d-flex justify-content-end"><div class="d-flex"><div class="d-flex justify-content-center align-content-center"><div><svg class="icon" aria-hidden="true"><use xlink:href="#icon-chakan"></use></svg></div></div><div class="d-flex justify-content-center align-content-center">' +
-												toppingList[i].clickNum +
-												'</div></div><div class="d-flex"><div class="d-flex justify-content-center align-content-center"><div><svg class="icon" aria-hidden="true"><use xlink:href="#icon-pinglun "></use></svg></div></div><div class="d-flex justify-content-center align-content-center">' +
-												toppingList[i].commentNum + '</div></div></div></li>')
+											$("#topping").append('<li class="list-group-item border-left-0 border-right-0 d-flex"><div class="col-8 p-0"><a class="text-decoration-none" href="blog.html?' + toppingList[i].blogId + '">' + toppingList[i].topic + '</a></div><div class="col-4 p-0 d-flex justify-content-end"><div class="d-flex"><div class="d-flex justify-content-center align-content-center"><div><svg class="icon" aria-hidden="true"><use xlink:href="#icon-chakan"></use></svg></div></div><div class="d-flex justify-content-center align-content-center">' + toppingList[i].clickNum + '</div></div><div class="d-flex"><div class="d-flex justify-content-center align-content-center"><div><svg class="icon" aria-hidden="true"><use xlink:href="#icon-pinglun "></use></svg></div></div><div class="d-flex justify-content-center align-content-center">' + toppingList[i].commentNum + '</div></div></div></li>')
 										}
 										break;
 									case 500:
@@ -108,7 +91,7 @@ $(function() {
 								}
 
 							},
-							error: function() {
+							error: function () {
 								swal({
 									title: "服务器繁忙",
 									text: "请稍后重试",
@@ -122,14 +105,14 @@ $(function() {
 						break;
 				}
 			},
-			complete: function() {
+			complete: function () {
 				//完美关闭模态框
 				$('#loadmodal').modal('hide');
-				$('#loadmodal').on('shown.bs.modal', function() {
+				$('#loadmodal').on('shown.bs.modal', function () {
 					$('#loadmodal').modal('hide');
 				});
 			},
-			error: function() {
+			error: function () {
 				swal({
 					title: "服务器繁忙",
 					text: "请稍后重试",
@@ -138,7 +121,7 @@ $(function() {
 			}
 		});
 	};
-	$("#search").click(function() {
+	$("#search").click(function () {
 		var keyWordInput = $("#searchContent");
 		if ("" != keyWordInput.val()) {
 			var keyWord = keyWordInput.val();
@@ -157,7 +140,7 @@ $(function() {
 			});
 		}
 	});
-	loadSearch = function(keyWord) {
+	loadSearch = function (keyWord) {
 		$.ajax({
 			type: 'get',
 			url: url("blog/search/" + keyWord),
@@ -166,12 +149,12 @@ $(function() {
 			data: {
 				rule: 1,
 			},
-			beforeSend: function() {
+			beforeSend: function () {
 				//动画
 
 				$('#loadmodal').modal('show')
 			},
-			success: function(data) {
+			success: function (data) {
 				var res = data;
 				switch (res.status) {
 					//发布成功
@@ -185,27 +168,18 @@ $(function() {
 							blogList[blog].createTime = getDateDiff(new Date(javaDate));
 							var li = $('<li class="list-group-item"></li>');
 							var mainDiv = $('<div class="d-flex align-items-center"></div>');
-							mainDiv.append('<div><a href="user.html?' + blogList[blog].userId + '" ><img src ="' + blogList[blog].headPic +
-								'" width = "45px" height = "45px" /></a ></div>');
+							mainDiv.append('<div><a href="user.html?' + blogList[blog].userId + '" ><img src ="' + blogList[blog].headPic + '" width = "45px" height = "45px" /></a ></div>');
 							var div1 = $('<div class="flex-grow-1"></div>');
 							//根据不同类型文章,设定不同显示颜色标题
 							if (blogList[blog].tagId == 1) {
 								//置顶文章
-								div1.append('<div><a class="text-danger" href="blog.html?' + blogList[blog].blogId + '">' + blogList[
-									blog].topic + '</a></div>')
+								div1.append('<div><a class="text-danger" href="blog.html?' + blogList[blog].blogId + '">' + blogList[blog].topic + '</a></div>')
 							} else {
-								div1.append('<div><a class="text-dark" href="blog.html?' + blogList[blog].blogId + '">' + blogList[
-									blog].topic + '</a></div>')
+								div1.append('<div><a class="text-dark" href="blog.html?' + blogList[blog].blogId + '">' + blogList[blog].topic + '</a></div>')
 							}
-							div1.append(
-								'<div class="d-flex justify-content-between  flex-column flex-sm-row"><div class="d-flex align-items-center"><a class="text-info mr-2 text-decoration-none" href="user.html?' +
-								blogList[blog].userId + '">' + blogList[blog].nickName +
-								'</a><svg class="icon" aria-hidden="true"><use xlink:href="#icon-dingshi"></use></svg><span class=" bg-light rounded">' +
-								blogList[blog].createTime +
-								'</span></div><div class="d-flex  justify-content-end"><div class="d-flex align-items-center  mr-2"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-chakan"></use></svg>' +
-								blogList[blog].clickNum +
-								'</div><div class="d-flex align-items-center"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-pinglun"></use></svg>' +
-								blogList[blog].commentNum + '</div></div></div>');
+
+
+							div1.append('<div class="d-flex justify-content-between  flex-column flex-sm-row"><div class="d-flex align-items-center"><a class="text-info mr-2 text-decoration-none" href="user.html?' + blogList[blog].userId + '">' + blogList[blog].nickName + '</a><svg class="icon" aria-hidden="true"><use xlink:href="#icon-dingshi"></use></svg><span class=" bg-light rounded">' + blogList[blog].createTime + '</span></div><div class="d-flex  justify-content-end"><div class="d-flex align-items-center  mr-2"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-chakan"></use></svg>' + blogList[blog].clickNum + '</div><div class="d-flex align-items-center"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-pinglun"></use></svg>' + blogList[blog].commentNum + '</div></div></div>');
 							mainDiv.append(div1);
 							li.append(mainDiv);
 
@@ -221,20 +195,14 @@ $(function() {
 							data: {
 
 							},
-							success: function(data) {
+							success: function (data) {
 								var res = data;
 								switch (res.status) {
 									//加载公告成功
 									case 200:
 										var toppingList = res.obj;
 										for (var i in toppingList) {
-											$("#topping").append(
-												'<li class="list-group-item border-left-0 border-right-0 d-flex"><div class="col-8 p-0"><a class="text-decoration-none" href="blog.html?' +
-												toppingList[i].blogId + '">' + toppingList[i].topic +
-												'</a></div><div class="col-4 p-0 d-flex justify-content-end"><div class="d-flex"><div class="d-flex justify-content-center align-content-center"><div><svg class="icon" aria-hidden="true"><use xlink:href="#icon-chakan"></use></svg></div></div><div class="d-flex justify-content-center align-content-center">' +
-												toppingList[i].clickNum +
-												'</div></div><div class="d-flex"><div class="d-flex justify-content-center align-content-center"><div><svg class="icon" aria-hidden="true"><use xlink:href="#icon-pinglun "></use></svg></div></div><div class="d-flex justify-content-center align-content-center">' +
-												toppingList[i].commentNum + '</div></div></div></li>')
+											$("#topping").append('<li class="list-group-item border-left-0 border-right-0 d-flex"><div class="col-8 p-0"><a class="text-decoration-none" href="blog.html?' + toppingList[i].blogId + '">' + toppingList[i].topic + '</a></div><div class="col-4 p-0 d-flex justify-content-end"><div class="d-flex"><div class="d-flex justify-content-center align-content-center"><div><svg class="icon" aria-hidden="true"><use xlink:href="#icon-chakan"></use></svg></div></div><div class="d-flex justify-content-center align-content-center">' + toppingList[i].clickNum + '</div></div><div class="d-flex"><div class="d-flex justify-content-center align-content-center"><div><svg class="icon" aria-hidden="true"><use xlink:href="#icon-pinglun "></use></svg></div></div><div class="d-flex justify-content-center align-content-center">' + toppingList[i].commentNum + '</div></div></div></li>')
 										}
 										break;
 									case 500:
@@ -243,7 +211,7 @@ $(function() {
 								}
 
 							},
-							error: function() {
+							error: function () {
 								swal({
 									title: "服务器繁忙",
 									text: "请稍后重试",
@@ -257,14 +225,14 @@ $(function() {
 						break;
 				}
 			},
-			complete: function() {
+			complete: function () {
 				//完美关闭模态框
 				$('#loadmodal').modal('hide');
-				$('#loadmodal').on('shown.bs.modal', function() {
+				$('#loadmodal').on('shown.bs.modal', function () {
 					$('#loadmodal').modal('hide');
 				});
 			},
-			error: function() {
+			error: function () {
 				swal({
 					title: "服务器繁忙",
 					text: "请稍后重试",
@@ -297,12 +265,12 @@ $(function() {
 	}
 
 	//按时间加载blog
-	loadBlogByTime = function() {
+	loadBlogByTime = function () {
 		localStorage.setItem("rule", 1);
 		window.location.reload();
 	};
 	//按热度加载blog
-	loadBlogByHot = function() {
+	loadBlogByHot = function () {
 		localStorage.setItem("rule", 2);
 		window.location.reload();
 	}

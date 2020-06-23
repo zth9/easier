@@ -103,7 +103,7 @@ public class UserController {
                     });
                 }
             }
-            return RespBean.ok("修改成功");
+            return RespBean.ok("修改成功", selUser);
         }catch (Exception e){
             return RespBean.error("服务器繁忙");
         }

@@ -5,13 +5,6 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>主页</title>
 		<link rel="stylesheet" href="css/bootstrap.min.css" />
-		<script type="text/javascript">
-			//标注当前页
-			$("#nav-list li:eq(1) a").addClass("nav-active");
-			//用来显示手机版 图标
-			$("#title span").text("发布博客");
-			$("#title svg use").attr("xlink:href", "#icon-biji");
-		</script>
 		<style type="text/css">
 			#release-content {
 				padding-top: 20px;
@@ -195,6 +188,7 @@
 					-webkit-transform: rotate(360deg) scale(1);
 					transform: rotate(360deg) scale(1);
 				}
+			}
 		</style>
 	</head>
 	<body>
@@ -264,7 +258,7 @@
 							<ul id="user-bar" class="nav navbar-nav d-none">
 								<li class="nav-item">
 									<a id="cur-user" href="#" class="nav-link btn" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-									 aria-expanded="false"">
+									 aria-expanded="false">
 		                                    <span id=" user-name" class="text-dark">用户</span>
 										<img src="http://123.57.236.58/easier/user/avatar/1.png" width="50px" height="50px" />
 									</a>
@@ -360,7 +354,7 @@
 		<script src="js/sweetalert.min.js"></script>
 		<script src="js/wangEditor.min.js"></script>
 		<script src="js/xss.min.js"></script>
-		<script src="js/release.js"></script>
 		<script src="js/index.js"></script>
+		<script src="js/release.js"></script>
 	</body>
 </html>
