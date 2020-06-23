@@ -156,4 +156,12 @@
     where user_id = #{userId, jdbcType=INTEGER}
     order by create_time desc;
   </select>
+  <select id="selectByKeyWord" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Home" />
+    from blog
+    where topic like concat(concat('%', #{keyWord,jdbcType=VARCHAR}), '%')
+    order by create_time desc;
+  </select>
+
 </mapper>

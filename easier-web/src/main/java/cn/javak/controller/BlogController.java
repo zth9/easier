@@ -9,6 +9,8 @@ import cn.javak.service.CommentService;
 import cn.javak.service.TokenService;
 import cn.javak.service.UserService;
 import cn.javak.token.TokenUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,6 +31,8 @@ public class BlogController {
     private UserService userService;
     @Autowired
     private CommentService commentService;
+
+    private static final Logger logger = LoggerFactory.getLogger(BlogController.class);
 
     /**
      * 发布博客
@@ -205,7 +209,6 @@ public class BlogController {
         if (!selBlog.getUserId().equals(userId)){
             return RespBean.error("reject");
         }
-
         return RespBean.ok("可编辑", selBlog);
     }
 
@@ -216,6 +219,14 @@ public class BlogController {
      */
     @GetMapping("search/{keyWord}")
     public RespBean search(@PathVariable("keyWord") String keyWord){
-        return RespBean.error("服务暂未开放");
+        try {
+            List<Blog> blogList = blogService.selectByKeyWord(keyWord);
+            logger.info("关键字["+keyWord+"]查询出数据["+blogList.size()+"]条数据");
+            return RespBean.ok("查询成功", blogList);
+        }catch (Exception e){
+            logger.error(e.getMessage());
+            e.printStackTrace();
+            return RespBean.error("服务器繁忙");
+        }
     }
 }

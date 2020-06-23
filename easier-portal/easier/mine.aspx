@@ -137,6 +137,7 @@
                                 cache: false,
                                 dataType: 'json',
                                 data: {
+                                    username: JSON.parse(localStorage.getItem("user")).username,
                                     password: input
                                 },
                                 beforeSend: function (req) {
@@ -241,6 +242,7 @@
                         cache: false,
                         dataType: 'json',
                         data: {
+                            username: JSON.parse(localStorage.getItem("user")).username,
                             nickName: input
                         },
                         beforeSend: function (req) {
@@ -342,6 +344,7 @@
                         cache: false,
                         dataType: 'json',
                         data: {
+                            username: JSON.parse(localStorage.getItem("user")).username,
                             email: input
                         },
                         beforeSend: function (req) {

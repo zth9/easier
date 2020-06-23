@@ -32,4 +32,6 @@ public interface BlogMapper {
     List<Blog> selectHot();
 
     List<Blog> selectByUserId(Integer userId);
+
+    List<Blog> selectByKeyWord(String keyWord);
 }

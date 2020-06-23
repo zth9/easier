@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -54,7 +53,7 @@ public class BlogService {
         for (Blog blog : blogList) {
             //装配用户信息
             for (User user : users) {
-                if (blog.getUserId() == user.getUserId()){
+                if (blog.getUserId().equals(user.getUserId())){
                     blog.setHeadPic(user.getHeadPic());
                     blog.setNickName(user.getNickName());
                     break;
@@ -167,7 +166,7 @@ public class BlogService {
     public void delete(Integer tokenUserId, Integer id) throws Exception {
         Blog blog = blogMapper.selectByPrimaryKey(id);
         if (!tokenUserId.equals(blog.getUserId())){
-            throw new RuntimeException("不是你写的,咋都没法删");
+            throw new RuntimeException("非法删除");
         }
         //进行删除
         //删除博客标签关联
@@ -186,5 +185,21 @@ public class BlogService {
 
     public void update(Blog blog) {
         blogMapper.updateByPrimaryKeySelective(blog);
+    }
+
+    public List<Blog> selectByKeyWord(String keyWord) {
+        List<Blog> blogList = blogMapper.selectByKeyWord(keyWord);
+        List<User> users = userMapper.selectOnlyInfo();
+        for (Blog blog : blogList) {
+            //装配用户信息
+            for (User user : users) {
+                if (blog.getUserId().equals(user.getUserId())){
+                    blog.setHeadPic(user.getHeadPic());
+                    blog.setNickName(user.getNickName());
+                    break;
+                }
+            }
+        }
+        return blogList;
     }
 }

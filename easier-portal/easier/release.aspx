@@ -21,7 +21,7 @@
                     text: "正在前往登录页...",
                     icon: "error",
                     buttons: false,
-                    timer: 1500,
+                    timer: 1200,
                 }).then(function () {
                     window.location.replace("login.aspx")
                 });
