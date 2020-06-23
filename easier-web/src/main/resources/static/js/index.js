@@ -7,7 +7,7 @@ getToken = function () {
     if (null == user) {
         window.location.replace("login.html");
     }
-    console.log("更新前用户:"+user);
+    console.log("更新前用户:" + user);
     var username = JSON.parse(user).username;
     var password = JSON.parse(user).password;
     //ajax
@@ -31,7 +31,7 @@ getToken = function () {
                     var storage = window.localStorage;
                     //设置用户信息到本地
                     storage.removeItem("user");
-                    console.log("更新后用户:"+res.obj.user.toString());
+                    console.log("更新后用户:" + res.obj.user.toString());
                     storage.setItem("user", JSON.stringify(res.obj.user));
                     var token = res.obj.token;
                     storage.setItem("token", token);
@@ -141,31 +141,32 @@ $(function () {
     $("#logout").click(function () {
         var user = localStorage.getItem("user");
         if (null != user) {
-			swal({
-				title: "确定要退出登录么?",
-				text: "  ",
-				icon: "warning",
-				buttons: {
-					cancel: "取消",
-					confirm: "退出",
-				},
-				dangerMode: true,
-			}).then((willDelete) => {
-				if(willDelete) {
-					//todo 调用logout接口
-					localStorage.removeItem("user");
-					localStorage.removeItem("token");
-					swal({
-						title: "退出成功",
-						text: " ",
-						icon: "success",
-						buttons: false,
-						timer: 1000,
-					}).then(function () {
-						window.location.replace("home.html")
-					});
-				}
-			};)
+            swal({
+                title: "确定要退出登录么?",
+                text: "  ",
+                icon: "warning",
+                buttons: {
+                    cancel: "取消",
+                    confirm: "退出",
+                },
+                dangerMode: true,
+            }).then((willDelete)=> {
+                if(willDelete) {
+                    //todo 调用logout接口
+                    localStorage.removeItem("user");
+                    localStorage.removeItem("token");
+                    swal({
+                        title: "退出成功",
+                        text: " ",
+                        icon: "success",
+                        buttons: false,
+                        timer: 1000,
+                    }).then(function () {
+                        window.location.replace("home.html")
+                    });
+                }
+            };
+        )
         }
     });
 });
