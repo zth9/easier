@@ -1,5 +1,5 @@
 url = function (i) {
-    return "http://localhost:8080/easier/" + i;
+    return "http://123.57.236.58:8080/easier/" + i;
 };
 //重获token
 getToken = function () {
