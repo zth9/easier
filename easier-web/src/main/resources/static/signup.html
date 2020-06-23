@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>注册</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="css/bootstrap.min.css" />
+		<script src="http://at.alicdn.com/t/font_1839202_2rbnbh0ykd7.js"></script>
+		<script src="js/jquery.min.js"></script>
+		<script src="js/popper.min.js"></script>
+
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/sweetalert.min.js"></script>
+		<script type="text/javascript">
+			//定义全局函数 用来拼接接口
+			url = function(i) {
+				return "http://123.57.236.58:8080/easier/" + i;
+				//return "http://localhost:8888/easier/" + i;
+			};
+			$(function() {});
+		</script>
+		<style type="text/css">
+			.icon {
+				width: 1.5em;
+				height: 1.5em;
+				vertical-align: -0.15em;
+				fill: currentColor;
+				overflow: hidden;
+			}
+
+			body {
+				padding: 0;
+				margin: 0;
+				height: 100vh;
+				background-repeat: no-repeat;
+				background-size: cover;
+				background-color: #b8e5f8;
+				background-attachment: fixed;
+				background-image: url(img/登录.png);
+				background-color: #b8e5f8
+			}
+
+			.main-form {
+				background-color: transparent;
+			}
+
+			#header {
+				min-height: 20vh;
+				line-height: 20vh;
+				background-color: transparent;
+			}
+
+			#content {}
+
+			.title {
+				height: 20px;
+				padding: 0px;
+				margin: 0px;
+			}
+
+			#load-modal {}
+
+			.bg-loader {
+				border-radius: 30px;
+				background-color: black;
+				opacity: 0.5;
+				border: none;
+			}
+
+			html .loader,
+			body .loader {
+				height: 50px;
+				width: 50px;
+				position: relative;
+			}
+
+			html .loader::after,
+			html .loader::before,
+			body .loader::after,
+			body .loader::before {
+				content: "";
+				width: 50px;
+				height: 50px;
+				position: absolute;
+				border: solid 8px transparent;
+				border-radius: 50%;
+				-webkit-animation: wiggle 1.4s linear infinite;
+				animation: wiggle 1.4s linear infinite;
+			}
+
+			html .loader::before,
+			body .loader::before {
+				border-top-color: #4285f4;
+				border-bottom-color: #34a853;
+			}
+
+			html .loader::after,
+			body .loader::after {
+				border-left-color: #fbbc05;
+				border-right-color: #ea4335;
+				-webkit-animation-delay: 0.7s;
+				animation-delay: 0.7s;
+			}
+
+			@-webkit-keyframes wiggle {
+				0% {
+					-webkit-transform: rotate(0deg) scale(1);
+					transform: rotate(0deg) scale(1);
+				}
+
+				50% {
+					-webkit-transform: rotate(180deg) scale(0.5);
+					transform: rotate(180deg) scale(0.5);
+				}
+
+				100% {
+					-webkit-transform: rotate(360deg) scale(1);
+					transform: rotate(360deg) scale(1);
+				}
+			}
+
+			@keyframes wiggle {
+				0% {
+					-webkit-transform: rotate(0deg) scale(1);
+					transform: rotate(0deg) scale(1);
+				}
+
+				50% {
+					-webkit-transform: rotate(180deg) scale(0.5);
+					transform: rotate(180deg) scale(0.5);
+				}
+
+				100% {
+					-webkit-transform: rotate(360deg) scale(1);
+					transform: rotate(360deg) scale(1);
+				}
+			}
+
+			#register-content {
+				padding: 0;
+				justify-content: center;
+			}
+
+			#register-form {
+				min-width: 430px;
+				background-color: white;
+				border-radius: 10px;
+				padding-top: 15px;
+				padding-bottom: 10px;
+				padding: 15px 10px 10px 10px;
+			}
+		</style>
+		<script type="text/javascript">
+			$(function() {
+				$("#gologin").click(function() {
+					$(window).attr('location', "login.html");
+				});
+				$(":submit").click(function() {
+					//校验用户名和密码
+					console.log("开始注册");
+					var username = $(":text").val();
+					var password = $(":password").eq(0).val();
+					var passwordAgain = $(":password").eq(1).val();
+					var formRule = new RegExp(/^[a-zA-Z0-9]{6,16}$/);
+					//满足条件开始登录
+					if (password != passwordAgain) {
+						swal({
+							title: "两次输入密码不一致",
+							text: " ",
+							icon: "warning",
+						});
+						return;
+					}
+					if (username.match(formRule) && password.match(formRule) && passwordAgain.match(formRule)) {
+						$.ajax({
+							type: 'post',
+							url: url("user"),
+							cache: false,
+							dataType: 'json',
+							data: {
+								username: username,
+								password: password
+							},
+							beforeSend: function() {
+								//禁止重复注册
+								$(":submit").attr('disabled', true);
+								$('#loadmodal').modal('show');
+							},
+							success: function(data) {
+								var res = data;
+								switch (res.status) {
+									//登陆成功
+									case 200:
+										//将用户信息保存至本地
+										$("#ContentPlaceHolder1_username").val("");
+										$("#ContentPlaceHolder1_password").val("");
+										localStorage.removeItem("user");
+										localStorage.setItem("user", JSON.stringify(res.obj));
+										console.log("已经注册的对象:" + localStorage.getItem("user"));
+										swal({
+											title: "注册成功",
+											text: "正在前往主页...",
+											icon: "success",
+											buttons: false,
+											timer: 1000,
+										}).then(function() {
+											window.location.replace("home.html")
+										});
+										break;
+									case 500:
+										swal("登录失败", res.msg, "error");
+										break;
+								}
+
+							},
+							complete: function() {
+								console.log("执行完成");
+								$("#ContentPlaceHolder1_submit").attr('disabled', false);
+
+								//完美关闭模态框
+								$('#loadmodal').modal('hide');
+								$('#loadmodal').on('shown.bs.modal', function() {
+									console.log("完全可见");
+									$('#loadmodal').modal('hide');
+								});
+							},
+							error: function() {
+								swal({
+									title: "服务器繁忙",
+									text: "请稍后重试",
+									icon: "error",
+								});
+							}
+						});
+					} else {
+						swal({
+							title: "非法输入",
+							text: "用户名以及密码应为6~16位 不允许特殊字符",
+							icon: "warning",
+						});
+					}
+				})
+			});
+		</script>
+	</head>
+	<body>
+		<div class="main-form" id="Form1" runat="server" submitdisabledcontrols="True">
+			<div id="header" class="container text-center">
+				<a class="btn btn-link" href="home.html">先去逛逛!</a>
+			</div>
+			<div id="content" class="container justify-content-center flex-row">
+				<div id="register-content" class="row">
+
+					<div id="register-form" class="col-md-4">
+						<h4 class="text-center">
+							<svg class="icon" aria-hidden="true">
+								<use xlink:href="#icon-zhuce"></use>
+							</svg>
+							<svg class="icon" aria-hidden="true">
+								<use xlink:href="#icon-zhuce1"></use>
+							</svg>
+						</h4>
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<span class="input-group-text">
+									<svg class="icon" aria-hidden="true">
+										<use xlink:href="#icon-denglu"></use>
+									</svg>
+								</span>
+							</div>
+							<input type="text" ID="username" runat="server" Class="form-control" placeholder="用户名"></input>
+
+						</div>
+						<div class="input-group mb-2">
+						</div>
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<span class="input-group-text">
+									<svg class="icon" aria-hidden="true">
+										<use xlink:href="#icon-denglumima"></use>
+									</svg>
+								</span>
+							</div>
+							<input type="password" ID="password" runat="server" Class="form-control" placeholder="密码" ></input>
+						</div>
+						<div class="input-group mb-2">
+						</div>
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<span class="input-group-text">
+									<svg class="icon" aria-hidden="true">
+										<use xlink:href="#icon-zhongzhimima"></use>
+									</svg>
+								</span>
+							</div>
+							<input type="password" ID="passwordAgain" Class="form-control" placeholder="重复密码"></input>
+						</div>
+						<div class="input-group mb-2">
+						</div>
+						<div class="input-group">
+							<button ID="submit" class="btn btn-primary btn-block text-white">注册</button>
+							<div class="modal fade" id="loadmodal">
+								<div class="modal-dialog">
+									<div class="modal-content bg-loader">
+										<div class="modal-body d-flex justify-content-center align-items-center flex-column">
+											<div class="loader"></div>
+											<div class="text-white">世界上最远的距离是知道和做到</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="input-group">
+							<div class="ml-auto">
+								<button id="gologin" type="button" class="btn btn-link btn-sm">已有账号?去登陆!</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

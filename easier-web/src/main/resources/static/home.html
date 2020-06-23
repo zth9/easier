@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>主页</title>
+		<link rel="stylesheet" href="css/bootstrap.min.css" />
+		<style type="text/css">
+			.test {
+				width: 400px;
+			}
+
+			#left-content {
+				padding: 0px;
+			}
+
+			#right-content {}
+
+			.blog {
+				margin-bottom: 10px;
+			}
+
+			.blog li {}
+
+			.flex-grow-1 {
+				padding-left: 20px;
+			}
+
+			#home-content {}
+		</style>
+		<style type="text/css">
+			.icon {
+				width: 1.25em;
+				height: 1.25em;
+				vertical-align: -0.15em;
+				fill: currentColor;
+				overflow: hidden;
+				justify-content: center;
+				align-content: center;
+			}
+
+			body {
+				padding: 0;
+				margin: 0;
+				height: 100vh;
+				background-repeat: no-repeat;
+				background-size: cover;
+				background-color: #f4f5f7;
+			}
+
+			#form1 {}
+
+			#header {
+				background-color: #fff;
+				height: auto;
+				max-width: 100%;
+				height: 68px;
+				box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.08);
+				display: flex;
+				justify-items: center;
+			}
+
+			#header-nav {
+				box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.08);
+			}
+
+			#main {
+				margin-top: 78px;
+				background-color: white;
+				max-width: 1140px;
+				display: flex;
+				flex-direction: column;
+
+			}
+
+			#footer {
+				border-top: 1px solid #e2e2e2;
+			}
+
+			.nopadding {
+				padding-left: 0;
+				padding-right: 0;
+			}
+
+			.nav-a {
+				color: #8590a6;
+				display: inline-block;
+				border-bottom: 3px solid rgba(0, 0, 0, 0);
+			}
+
+			.nav-a:hover {
+				color: black;
+				border-radius: 0 !important;
+				border-bottom: 3px solid #007bff;
+			}
+
+			.nav-active {
+				border-bottom: 3px solid #007bff;
+				border-radius: 0 !important;
+			}
+
+			#cur-user {
+				box-shadow: none;
+			}
+
+			#cur-user:hover {
+				background-color: #f4f5f7
+			}
+
+
+			.dropdown-menu:hover {
+				background-color: white;
+				transition: all .2s;
+			}
+
+			.dropdown-item:hover {
+				background-color: #f4f5f7;
+				transition: all .2s;
+			}
+
+			#user-name {
+				padding-right: 10px;
+			}
+
+			#tools-bar {
+				min-height: 68px;
+				justify-content: space-between;
+				align-items: center;
+			}
+
+			.bg-loader {
+				border-radius: 30px;
+				background-color: black;
+				opacity: 0.5;
+				border: none;
+			}
+
+			html .loader,
+			body .loader {
+				height: 50px;
+				width: 50px;
+				position: relative;
+			}
+
+			html .loader::after,
+			html .loader::before,
+			body .loader::after,
+			body .loader::before {
+				content: "";
+				width: 50px;
+				height: 50px;
+				position: absolute;
+				border: solid 8px transparent;
+				border-radius: 50%;
+				-webkit-animation: wiggle 1.4s linear infinite;
+				animation: wiggle 1.4s linear infinite;
+			}
+
+			html .loader::before,
+			body .loader::before {
+				border-top-color: #4285f4;
+				border-bottom-color: #34a853;
+			}
+
+			html .loader::after,
+			body .loader::after {
+				border-left-color: #fbbc05;
+				border-right-color: #ea4335;
+				-webkit-animation-delay: 0.7s;
+				animation-delay: 0.7s;
+			}
+
+			@-webkit-keyframes wiggle {
+				0% {
+					-webkit-transform: rotate(0deg) scale(1);
+					transform: rotate(0deg) scale(1);
+				}
+
+				50% {
+					-webkit-transform: rotate(180deg) scale(0.5);
+					transform: rotate(180deg) scale(0.5);
+				}
+
+				100% {
+					-webkit-transform: rotate(360deg) scale(1);
+					transform: rotate(360deg) scale(1);
+				}
+			}
+
+			@keyframes wiggle {
+				0% {
+					-webkit-transform: rotate(0deg) scale(1);
+					transform: rotate(0deg) scale(1);
+				}
+
+				50% {
+					-webkit-transform: rotate(180deg) scale(0.5);
+					transform: rotate(180deg) scale(0.5);
+				}
+
+				100% {
+					-webkit-transform: rotate(360deg) scale(1);
+					transform: rotate(360deg) scale(1);
+				}
+		</style>
+	</head>
+	<body>
+		<div id="form1" runat="server">
+			<div id="header" class="fixed-top">
+				<div class="nopadding container">
+					<nav class="nopadding navbar navbar-expand-md bg-white navbar-header" style="padding:0;height: 68px;">
+						<a class="navbar-brand" href="home.html">Blog</a>
+						<span id="title" class="navbar-brand navbar-toggler" href="#">
+							<svg class="icon" aria-hidden="true">
+								<use xlink:href="#icon-guangchang"></use>
+							</svg>
+							<span class="text-center">
+
+							</span>
+						</span>
+						<button style="margin:16.5px 0;" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu">
+							<svg class="icon" aria-hidden="true">
+								<use xlink:href="#icon-caidan"></use>
+							</svg>
+						</button>
+						<div style="justify-content: space-between;" class="collapse navbar-collapse text-center bg-white" id="menu">
+							<ul id="nav-list" class="nav navbar-nav nav-pills">
+								<li class="nav-item">
+									<a class="nav-link nav-a navbar-brand" href="home.html">
+										<svg class="icon" aria-hidden="true">
+											<use xlink:href="#icon-shouye"></use>
+										</svg>
+										首页
+									</a>
+								</li>
+								<li id="blog" class="nav-item">
+									<a class="nav-link nav-a navbar-brand" href="#">
+										<svg class="icon" aria-hidden="true">
+											<use xlink:href="#icon-biji"></use>
+										</svg>
+										发布Blog
+									</a>
+								</li>
+								<li id="mine" class="nav-item d-none">
+									<a class="nav-link nav-a navbar-brand" href="mine.html">
+										<svg class="icon" aria-hidden="true">
+											<use xlink:href="#icon-gerenzhongxin"></use>
+										</svg>
+										个人中心
+									</a>
+								</li>
+							</ul>
+							<ul id="login-bar" class="nav navbar-nav d-none">
+								<li class="nav-item">
+									<a class="nav-link nav-a navbar-brand" href="signup.html">
+										<svg class="icon" aria-hidden="true">
+											<use xlink:href="#icon-zhuce1"></use>
+										</svg>
+										注册
+									</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-a nav-link navbar-brand" href="login.html">
+										<svg class="icon" aria-hidden="true">
+											<use xlink:href="#icon-denglu1"></use>
+										</svg>
+										登录
+									</a>
+								</li>
+							</ul>
+							<ul id="user-bar" class="nav navbar-nav d-none">
+								<li class="nav-item">
+									<a id="cur-user" href="#" class="nav-link btn" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+									 aria-expanded="false"">
+		                                    <span id=" user-name" class="text-dark">用户</span>
+										<img src="http://123.57.236.58/easier/user/avatar/1.png" width="50px" height="50px" />
+									</a>
+									<div class="dropdown-menu dropdown-menu-right text-center" style="min-width: 8rem;" aria-labelledby="dropdownMenuButton">
+										<a class="dropdown-item" href="mine.html?edit">
+											<svg class="icon" aria-hidden="true">
+												<use xlink:href="#icon-B"></use>
+											</svg>
+											编辑资料
+										</a>
+										<a class="dropdown-item" href="mine.html?adv">
+											<svg class="icon" aria-hidden="true">
+												<use xlink:href="#icon-tongzhi"></use>
+											</svg>
+											通知信息
+										</a>
+										<a class="dropdown-item" href="mine.html?blog">
+											<svg class="icon" aria-hidden="true">
+												<use xlink:href="#icon-guanli"></use>
+											</svg>
+											博客管理
+										</a>
+										<div class="dropdown-divider"></div>
+										<a id="logout" class="dropdown-item" href="#">
+											<svg class="icon" aria-hidden="true">
+												<use xlink:href="#icon-tuichu"></use>
+											</svg>
+											退出
+										</a>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</nav>
+				</div>
+				<asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+				</asp:ContentPlaceHolder>
+			</div>
+			<div id="main" class="container">
+				<div class="modal fade" id="loadmodal">
+					<div class="modal-dialog">
+						<div class="modal-content bg-loader">
+							<div class="modal-body d-flex justify-content-center align-items-center flex-column">
+								<div class="loader"></div>
+								<div class="text-white">世界上最远的距离是前端和后端</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="tools-bar" class="nopadding container d-sm-flex flex-sm-nowrap flex-row-reverse">
+					<div class="d-flex pt-2">
+						<div class="form-inline flex-nowrap  flex-grow-1">
+							<input id="searchContent" style="margin-right: 5px;" class="form-control mr-sm-2  flex-grow-1" autocomplete="off"
+							 type="search" placeholder="输入关键字" aria-label="Search">
+							<a id="search" class="btn page-link btn-lg text-decoration-none border-0" data-toggle="tooltip" data-placement="bottom"
+							 title="查询">
+								<svg class="icon" aria-hidden="true">
+									<use xlink:href="#icon-sousuo"></use>
+								</svg>
+							</a>
+						</div>
+						<div class="form-inline flex-nowrap">
+							<a id="goRelease" class="btn page-link btn-lg text-decoration-none border-0 d-none" href="release.html"
+							 data-toggle="tooltip" data-placement="bottom" title="发布Blog">
+								<svg class="icon" aria-hidden="true">
+									<use xlink:href="#icon-biji"></use>
+								</svg>
+							</a>
+						</div>
+					</div>
+					<div>
+						<div class="btn-group" role="group" aria-label="Basic example">
+							<button type="button" class="btn btn-link btn-sm text-decoration-none">综合</button>
+							<button id="hotBtn" type="button" class="btn btn-link btn-sm text-decoration-none" onclick="loadBlogByHot()">按热度</button>
+							<button id="timeBtn" type="button" class="btn btn-link btn-sm text-decoration-none" onclick="loadBlogByTime()">按时间</button>
+						</div>
+					</div>
+				</div>
+				<div id="home-content" class="row flex-row-reverse">
+					<div id="right-content" class="col-md-4 bg-light">
+						<!-- 热门文章 -->
+						<div class="mt-2 mb-2">
+							<div class="text-center">
+								<a class="btn btn-block bg-white text-danger">
+									热门
+									<svg class="icon" aria-hidden="true">
+										<use xlink:href="#icon-remen"></use>
+									</svg>
+								</a>
+
+							</div>
+							<ul id="topping" class="list-group">
+							</ul>
+						</div>
+					</div>
+					<!-- 首页显示blog -->
+					<div id="left-content" class="col-md-8">
+						<ul id="blog-list" class="blog list-group">
+						</ul>
+					</div>
+					<!-- 首页显示最近用户 -->
+				</div>
+			</div>
+			<div id="footer" class="container flex-column justify-content-center mt-3 mb-3">
+				<p class="text-center">
+					Copyright © 2019-2020 行之则易
+					<a class="btn-link" target="_blank" href="https://blog.csdn.net/weixin_43544077">
+						CSDN
+						<svg class="icon" style="font-size:13px" aria-hidden="true">
+							<use xlink:href="#icon-csdn"></use>
+						</svg>
+					</a>
+					<a class="btn-link" target="_blank" href="https://github.com/Tian90coder/easier">
+						Github
+						<svg class="icon" style="font-size:13px" aria-hidden="true">
+							<use xlink:href="#icon-github"></use>
+						</svg>
+					</a>
+				</p>
+				<p class="text-center"><a href="http://www.beian.miit.gov.cn/" target="_blank" class="btn-link">豫ICP备20002051号-1
+					</a> </p>
+			</div>
+		</div>
+		<script src="http://at.alicdn.com/t/font_1839202_2rbnbh0ykd7.js"></script>
+		<script src="js/jquery.min.js"></script>
+		<script src="js/popper.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/sweetalert.min.js"></script>
+		<script src="js/home.js"></script>
+		<script src="js/index.js"></script>
+	</body>
+</html>
