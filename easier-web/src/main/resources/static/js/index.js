@@ -31,7 +31,6 @@ getToken = function () {
                     var storage = window.localStorage;
                     //设置用户信息到本地
                     storage.removeItem("user");
-                    console.log("更新后用户:" + res.obj.user.toString());
                     storage.setItem("user", JSON.stringify(res.obj.user));
                     var token = res.obj.token;
                     storage.setItem("token", token);
