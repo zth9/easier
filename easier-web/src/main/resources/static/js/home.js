@@ -48,7 +48,7 @@ $(function () {
 							blogList[blog].createTime = getDateDiff(new Date(javaDate));
 							var li = $('<li class="list-group-item"></li>');
 							var mainDiv = $('<div class="d-flex align-items-center"></div>');
-							mainDiv.append('<div><a href="user.html?' + blogList[blog].userId + '" ><img src ="' + blogList[blog].headPic + '" width = "45px" height = "45px" /></a ></div>');
+							mainDiv.append('<div><a href="user/index/' + blogList[blog].userId + '" ><img src ="' + blogList[blog].headPic + '" width = "45px" height = "45px" /></a ></div>');
 							var div1 = $('<div class="flex-grow-1"></div>');
 							//根据不同类型文章,设定不同显示颜色标题
 							if (blogList[blog].tagId == 1) {
@@ -59,7 +59,7 @@ $(function () {
 							}
 
 
-							div1.append('<div class="d-flex justify-content-between  flex-column flex-sm-row"><div class="d-flex align-items-center"><a class="text-info mr-2 text-decoration-none" href="user.html?' + blogList[blog].userId + '">' + blogList[blog].nickName + '</a><svg class="icon" aria-hidden="true"><use xlink:href="#icon-dingshi"></use></svg><span class=" bg-light rounded">' + blogList[blog].createTime + '</span></div><div class="d-flex  justify-content-end"><div class="d-flex align-items-center  mr-2"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-chakan"></use></svg>' + blogList[blog].clickNum + '</div><div class="d-flex align-items-center"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-pinglun"></use></svg>' + blogList[blog].commentNum + '</div></div></div>');
+							div1.append('<div class="d-flex justify-content-between  flex-column flex-sm-row"><div class="d-flex align-items-center"><a class="text-info mr-2 text-decoration-none" href="user/index/' + blogList[blog].userId + '">' + blogList[blog].nickName + '</a><svg class="icon" aria-hidden="true"><use xlink:href="#icon-dingshi"></use></svg><span class=" bg-light rounded">' + blogList[blog].createTime + '</span></div><div class="d-flex  justify-content-end"><div class="d-flex align-items-center  mr-2"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-chakan"></use></svg>' + blogList[blog].clickNum + '</div><div class="d-flex align-items-center"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-pinglun"></use></svg>' + blogList[blog].commentNum + '</div></div></div>');
 							mainDiv.append(div1);
 							li.append(mainDiv);
 
@@ -168,7 +168,7 @@ $(function () {
 							blogList[blog].createTime = getDateDiff(new Date(javaDate));
 							var li = $('<li class="list-group-item"></li>');
 							var mainDiv = $('<div class="d-flex align-items-center"></div>');
-							mainDiv.append('<div><a href="user.html?' + blogList[blog].userId + '" ><img src ="' + blogList[blog].headPic + '" width = "45px" height = "45px" /></a ></div>');
+							mainDiv.append('<div><a href="user/index/' + blogList[blog].userId + '" ><img src ="' + blogList[blog].headPic + '" width = "45px" height = "45px" /></a ></div>');
 							var div1 = $('<div class="flex-grow-1"></div>');
 							//根据不同类型文章,设定不同显示颜色标题
 							if (blogList[blog].tagId == 1) {
@@ -179,7 +179,7 @@ $(function () {
 							}
 
 
-							div1.append('<div class="d-flex justify-content-between  flex-column flex-sm-row"><div class="d-flex align-items-center"><a class="text-info mr-2 text-decoration-none" href="user.html?' + blogList[blog].userId + '">' + blogList[blog].nickName + '</a><svg class="icon" aria-hidden="true"><use xlink:href="#icon-dingshi"></use></svg><span class=" bg-light rounded">' + blogList[blog].createTime + '</span></div><div class="d-flex  justify-content-end"><div class="d-flex align-items-center  mr-2"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-chakan"></use></svg>' + blogList[blog].clickNum + '</div><div class="d-flex align-items-center"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-pinglun"></use></svg>' + blogList[blog].commentNum + '</div></div></div>');
+							div1.append('<div class="d-flex justify-content-between  flex-column flex-sm-row"><div class="d-flex align-items-center"><a class="text-info mr-2 text-decoration-none" href="user/index/' + blogList[blog].userId + '">' + blogList[blog].nickName + '</a><svg class="icon" aria-hidden="true"><use xlink:href="#icon-dingshi"></use></svg><span class=" bg-light rounded">' + blogList[blog].createTime + '</span></div><div class="d-flex  justify-content-end"><div class="d-flex align-items-center  mr-2"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-chakan"></use></svg>' + blogList[blog].clickNum + '</div><div class="d-flex align-items-center"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-pinglun"></use></svg>' + blogList[blog].commentNum + '</div></div></div>');
 							mainDiv.append(div1);
 							li.append(mainDiv);
 

@@ -13,7 +13,8 @@
 		<script type="text/javascript">
 			//定义全局函数 用来拼接接口
 			url = function(i) {
-				return "http://123.57.236.58:8080/easier/" + i;
+				// return "http://123.57.236.58:8080/easier/" + i;
+				return "http://localhost:8080/easier/" + i;
 			};
 			$(function() {});
 		</script>
@@ -250,7 +251,7 @@
 	<body>
 		<div class="main-form" id="Form1" runat="server" submitdisabledcontrols="True">
 			<div id="header" class="container text-center">
-				<a class="btn btn-link" href="home.html">先去逛逛!</a>
+				<a class="btn btn-link" href="/easier/home.html">先去逛逛!</a>
 			</div>
 			<div id="content" class="container justify-content-center flex-row">
 				<div id="login-content" class="row">

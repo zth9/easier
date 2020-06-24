@@ -67,4 +67,8 @@ public class UserService {
     public User selectByNN(String nickName) {
         return userMapper.selectByNN(nickName);
     }
+
+    public User selectByUserId(Integer userId) {
+        return userMapper.selectByPrimaryKey(userId);
+    }
 }

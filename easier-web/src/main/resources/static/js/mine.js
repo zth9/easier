@@ -77,7 +77,7 @@ $(function () {
 			text: "请输入旧密码",
 			content: "input",
 		}).then((input) => {
-			if (input != JSON.parse(localStorage.getItem("user")).password;) {
+			if (input != JSON.parse(localStorage.getItem("user")).password) {
 			swal({
 				title: "输入错误",
 				text: " ",
@@ -90,7 +90,7 @@ $(function () {
 				text: "请输入新密码",
 				content: "input",
 			}).then((input) => {
-				if (;!input.replace(/&nbsp;/g, '').trim();) {
+				if (!input.replace(/&nbsp;/g, '').trim()) {
 				swal({
 					title: "输入不能为空",
 					text: " ",
@@ -191,9 +191,9 @@ $(function () {
 						title: "服务器繁忙",
 						text: "请稍后重试",
 						icon: "error",
-					});
+					})
 				}
-			});
+			})
 
 		})
 		}
@@ -205,7 +205,7 @@ $(function () {
 			text: "新昵称",
 			content: "input",
 		}).then((input) => {
-			if (;!input.replace(/&nbsp;/g, '').trim();) {
+			if (!input.replace(/&nbsp;/g, '').trim()) {
 			swal({
 				title: "输入不能为空",
 				text: " ",
@@ -308,7 +308,7 @@ $(function () {
 			text: "输入邮箱地址",
 			content: "input",
 		}).then((input) => {
-			if (;!input.replace(/&nbsp;/g, '').trim();) {
+			if (!input.replace(/&nbsp;/g, '').trim()) {
 			swal({
 				title: "输入不能为空",
 				text: " ",
@@ -548,7 +548,7 @@ $(function () {
 			} else {
 
 			}
-		};
+		}
 	)
 	};
 

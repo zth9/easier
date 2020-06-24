@@ -1,5 +1,6 @@
 url = function (i) {
-    return "http://123.57.236.58:8080/easier/" + i;
+    // return "http://123.57.236.58:8080/easier/" + i;
+    return "http://localhost:8080/easier/" + i;
 };
 //重获token
 getToken = function () {
@@ -161,10 +162,10 @@ $(function () {
                         buttons: false,
                         timer: 1000,
                     }).then(function () {
-                        window.location.replace("home.html")
+                        window.location.replace("/easier/home.html")
                     });
                 }
-            };
+            }
         )
         }
     });

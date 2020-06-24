@@ -1,5 +1,8 @@
 package cn.javak.pojo;
 
+import cn.javak.utils.DateUtils;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -25,6 +28,9 @@ public class Blog implements Serializable {
     private Integer commentNum;
 
     private Date createTime;
+
+    @JsonIgnore
+    private String createTimeStr;
 
     private boolean haveStar; // 是否点赞
 
@@ -106,6 +112,14 @@ public class Blog implements Serializable {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public String getCreateTimeStr() {
+        return DateUtils.getDate(createTime, "yyyy-MM-dd hh:mm:ss");
+    }
+
+    public void setCreateTimeStr(String createTimeStr) {
+        this.createTimeStr = createTimeStr;
     }
 
     public boolean isHaveStar() {

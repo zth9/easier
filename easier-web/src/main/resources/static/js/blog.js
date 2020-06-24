@@ -30,7 +30,7 @@ $(function () {
 					$("#article-title").append(blogShow);
 
 					var user = objMap.user;
-					var userShow = $('<div><img src="' + user.headPic + '" width="45" height="45" /></div><div class="ml-2"><div><a class="text-success mr-2 text-decoration-none" href="user.html?' + user.userId + '">' + user.nickName + '</a></div><div>' + blog.createTime + '</div></div>');
+					var userShow = $('<div><img src="' + user.headPic + '" width="45" height="45" /></div><div class="ml-2"><div><a class="text-success mr-2 text-decoration-none" href="user/index/' + user.userId + '">' + user.nickName + '</a></div><div>' + blog.createTime + '</div></div>');
 					$("#user-info").append(userShow);
 
 					$("#article").append(blog.content);
@@ -42,7 +42,7 @@ $(function () {
 					console.log(commentList.length);
 					for (var i in commentList) {
 						commentList[i].createTime = getDateDiff(commentList[i].createTime);
-						$("#comment-list").append('<li class="list-group-item"><div class="d-flex"><div><img src="' + commentList[i].headPic + '" width="45px" height="45px" /></div><div class="d-flex ml-2 flex-column mb-2"><div><a class="text-info mr-2 text-decoration-none" href="user.html?' + commentList[i].userId + '">' + commentList[i].nickName + '</a></div><div class=" text-center bg-light rounded">' + commentList[i].createTime + '</div></div></div><div>' + commentList[i].content + '</div></li>');
+						$("#comment-list").append('<li class="list-group-item"><div class="d-flex"><div><img src="' + commentList[i].headPic + '" width="45px" height="45px" /></div><div class="d-flex ml-2 flex-column mb-2"><div><a class="text-info mr-2 text-decoration-none" href="user/index/' + commentList[i].userId + '">' + commentList[i].nickName + '</a></div><div class=" text-center bg-light rounded">' + commentList[i].createTime + '</div></div></div><div>' + commentList[i].content + '</div></li>');
 					}
 					if (commentList.length == 0) {
 						$("#sort-rule").html('<div class="text-center flex-grow-1"><p>暂时还没有评论，快来抢沙发吧~</p></div>')
@@ -76,7 +76,7 @@ $(function () {
 			text: "请输入评论内容",
 			content: "input",
 		}).then((input) => {
-			if (;!input.replace(/&nbsp;/g, '').trim();) {
+			if (!input.replace(/&nbsp;/g, '').trim()) {
 			swal({
 				title: "输入不能为空",
 				text: " ",
@@ -152,7 +152,7 @@ $(function () {
 						icon: "error",
 					});
 				}
-			});
+			})
 		}
 	})
 	});

@@ -1,36 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>主页</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css"/>
-    <style type="text/css">
-        .test {
-            width: 400px;
-        }
-
-        #left-content {
-            padding: 0px;
-        }
-
-        #right-content {
-        }
-
-        .blog {
-            margin-bottom: 10px;
-        }
-
-        .blog li {
-        }
-
-        .flex-grow-1 {
-            padding-left: 20px;
-        }
-
-        #home-content {
-        }
-    </style>
+    <meta charset="UTF-8">
+    <title>个人主页</title>
+    <link rel="stylesheet" href="/easier/css/bootstrap.min.css"/>
     <style type="text/css">
         .icon {
             width: 1.25em;
@@ -103,11 +76,11 @@
             border-radius: 0 !important;
         }
 
-        #cur-user {
+        #dropdownMenuButton {
             box-shadow: none;
         }
 
-        #cur-user:hover {
+        #dropdownMenuButton:hover {
             background-color: #f4f5f7
         }
 
@@ -207,17 +180,44 @@
                 transform: rotate(360deg) scale(1);
             }
         }
+
+        #adv {}
+
+        #blog-m {}
+
+        #myTabContent {}
+
+        #user-form {
+            max-width: 432px;
+        }
+
+        #blog-list {}
+
+        #blog-list .input-group {
+            max-width: 720px;
+        }
+
+        #blog-list .form-control {}
+
+        #user-avator {
+            margin-left: 15px;
+        }
+
+        #user-avator img {
+            width: 180px;
+            height: 180px;
+        }
     </style>
 </head>
 <body>
-<div id="form1" runat="server">
+<div class="container">
     <div id="header" class="fixed-top">
         <div class="nopadding container">
             <nav class="nopadding navbar navbar-expand-md bg-white navbar-header" style="padding:0;height: 68px;">
                 <a class="navbar-brand" href="/easier/home.html">Blog</a>
-                <span id="title" class="navbar-brand navbar-toggler" href="#">
+                <span id="title" class="navbar-brand navbar-toggler mr-0" href="#">
 							<svg class="icon" aria-hidden="true">
-								<use xlink:href="#icon-guangchang"></use>
+								<use xlink:href="#icon-gerenzhongxin"></use>
 							</svg>
 							<span class="text-center">
 
@@ -233,7 +233,7 @@
                      id="menu">
                     <ul id="nav-list" class="nav navbar-nav nav-pills">
                         <li class="nav-item">
-                            <a class="nav-link nav-a navbar-brand" href="home.html">
+                            <a class="nav-link nav-a navbar-brand" href="/easier/home.html">
                                 <svg class="icon" aria-hidden="true">
                                     <use xlink:href="#icon-shouye"></use>
                                 </svg>
@@ -241,7 +241,7 @@
                             </a>
                         </li>
                         <li id="blog" class="nav-item">
-                            <a class="nav-link nav-a navbar-brand" href="#">
+                            <a class="nav-link nav-a navbar-brand" href="/easier/release.html">
                                 <svg class="icon" aria-hidden="true">
                                     <use xlink:href="#icon-biji"></use>
                                 </svg>
@@ -249,7 +249,7 @@
                             </a>
                         </li>
                         <li id="mine" class="nav-item d-none">
-                            <a class="nav-link nav-a navbar-brand" href="mine.html">
+                            <a class="nav-link nav-a navbar-brand" href="/easier/mine.html">
                                 <svg class="icon" aria-hidden="true">
                                     <use xlink:href="#icon-gerenzhongxin"></use>
                                 </svg>
@@ -277,27 +277,27 @@
                     </ul>
                     <ul id="user-bar" class="nav navbar-nav d-none">
                         <li class="nav-item">
-                            <a id="cur-user" href="#" class="nav-link btn" id="dropdownMenuButton"
+                            <a href="#" class="nav-link btn" id="dropdownMenuButton"
                                data-toggle="dropdown" aria-haspopup="true"
                                aria-expanded="false">
                                 <span id=" user-name" class="text-dark">用户</span>
-                                <img src="http://123.57.236.58/easier/user/avatar/1.png" width="50px" height="50px"/>
+                                <img  src="http://123.57.236.58/easier/user/avatar/1.png" width="50px" height="50px"/>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right text-center" style="min-width: 8rem;"
                                  aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="mine.html?edit">
+                                <a class="dropdown-item" href="/easier/mine.html?edit">
                                     <svg class="icon" aria-hidden="true">
                                         <use xlink:href="#icon-B"></use>
                                     </svg>
                                     编辑资料
                                 </a>
-                                <a class="dropdown-item" href="mine.html?adv">
+                                <a class="dropdown-item" href="/easier/mine.html?adv">
                                     <svg class="icon" aria-hidden="true">
                                         <use xlink:href="#icon-tongzhi"></use>
                                     </svg>
                                     通知信息
                                 </a>
-                                <a class="dropdown-item" href="mine.html?blog">
+                                <a class="dropdown-item" href="/easier/mine.html?blog">
                                     <svg class="icon" aria-hidden="true">
                                         <use xlink:href="#icon-guanli"></use>
                                     </svg>
@@ -316,78 +316,95 @@
                 </div>
             </nav>
         </div>
+
     </div>
+
     <div id="main" class="container">
-        <div class="modal fade" id="loadmodal">
-            <div class="modal-dialog">
-                <div class="modal-content bg-loader">
-                    <div class="modal-body d-flex justify-content-center align-items-center flex-column">
-                        <div class="loader"></div>
-                        <div class="text-white">世界上最远的距离是前端和后端</div>
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="edit-user" data-toggle="tab" href="#edit" role="tab" aria-controls="edit"
+                   aria-selected="true">Ta的资料</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="blog-manage" data-toggle="tab" href="#blog-m" role="tab" aria-controls="blog-m"
+                   aria-selected="false">Ta的博客</a>
+            </li>
+        </ul>
+        <div class="tab-content justify-content-center" id="myTabContent">
+            <div id="edit" class="tab-pane fade active show" role="tabpanel" aria-labelledby="edit-user">
+                <div class="flex-md-nowrap flex-column justify-content-center align-items-center d-flex ">
+                    <div id="user-avator"
+                         class=" flex-column mt-2 bg-white float-sm-right justify-content-center align-items-center d-flex">
+                        <div>
+                            <a href="#">
+                                <img th:src="${user.getHeadPic()}" id="user-headPic" src="#"/>
+                            </a>
+                        </div>
+                        <div class="mt-2">
+                            <input id="choiceFile" type="file" class="btn btn-sm btn-success d-none"/>
+                        </div>
+                    </div>
+                    <div id="user-form" class=" mt-2 flex-column">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">用户名</span>
+                            </div>
+                            <input th:placeholder="${user.getUsername()}" id="user-username" type="text" class="form-control" placeholder="未加载"
+                                   disabled="disabled">
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">昵&nbsp;&nbsp;&nbsp;&nbsp;称</span>
+                            </div>
+                            <input  th:placeholder="${user.getNickName()}" id="user-nickName" type="text" class="form-control" placeholder="未加载"
+                                   disabled="disabled">
+                        </div>
+
+                        <div id="bind-email" class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">邮&nbsp;&nbsp;&nbsp;&nbsp;箱</span>
+                            </div>
+                            <input  th:placeholder="${user.getEmail()} == null?'未绑定':${user.getEmail()}" id="user-email" type="text" class="form-control" placeholder="未加载"
+                                   disabled="disabled">
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div id="tools-bar" class="nopadding container d-sm-flex flex-sm-nowrap flex-row-reverse">
-            <div class="d-flex pt-2">
-                <div class="form-inline flex-nowrap  flex-grow-1">
-                    <input id="searchContent" style="margin-right: 5px;" class="form-control mr-sm-2  flex-grow-1"
-                           autocomplete="off"
-                           type="search" placeholder="输入关键字" aria-label="Search">
-                    <a id="search" class="btn page-link btn-lg text-decoration-none border-0" data-toggle="tooltip"
-                       data-placement="bottom"
-                       title="查询">
-                        <svg class="icon" aria-hidden="true">
-                            <use xlink:href="#icon-sousuo"></use>
-                        </svg>
-                    </a>
-                </div>
-                <div class="form-inline flex-nowrap">
-                    <a id="goRelease" class="btn page-link btn-lg text-decoration-none border-0 d-none"
-                       href="release.html"
-                       data-toggle="tooltip" data-placement="bottom" title="发布Blog">
-                        <svg class="icon" aria-hidden="true">
-                            <use xlink:href="#icon-biji"></use>
-                        </svg>
-                    </a>
-                </div>
-            </div>
-            <div>
-                <div class="btn-group" role="group" aria-label="Basic example">
-                    <button type="button" class="btn btn-link btn-sm text-decoration-none">综合</button>
-                    <button id="hotBtn" type="button" class="btn btn-link btn-sm text-decoration-none"
-                            onclick="loadBlogByHot()">按热度
-                    </button>
-                    <button id="timeBtn" type="button" class="btn btn-link btn-sm text-decoration-none"
-                            onclick="loadBlogByTime()">按时间
-                    </button>
-                </div>
-            </div>
-        </div>
-        <div id="home-content" class="row flex-row-reverse">
-            <div id="right-content" class="col-md-4 bg-light">
-                <!-- 热门文章 -->
-                <div class="mt-2 mb-2">
-                    <div class="text-center">
-                        <a class="btn btn-block bg-white text-danger">
-                            热门
-                            <svg class="icon" aria-hidden="true">
-                                <use xlink:href="#icon-remen"></use>
-                            </svg>
-                        </a>
+            <div id="blog-m" class="tab-pane fade" role="tabpanel" aria-labelledby="blog-manage">
+                <div id="blog-list" class="mt-2 d-flex flex-column justify-content-center align-items-center">
+                    <div th:each="blog:${blogList}" class="input-group mb-3 justify-content-between flex-column flex-sm-row mt-3">
+                        <div class="d-flex justify-content-between w-100 align-items-center">
+                            <div class="card d-flex justify-content-between bg-light w-75 text-wrap p-2">
+                                <span th:text="${blog.topic}">
+                                </span>
+                            </div>
+                            <div class="ml-2" style="min-width: 150px;">
+                                <a class="btn btn-sm btn-outline-info" href="#" th:href="'/easier/blog.html?' + ${blog.getBlogId()}">
+                                    查看
+                                </a>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-end align-items-center  flex-grow-1 border-bottom">
+                            <div th:text="${blog.createTimeStr}">
+                            </div>
+                            <div class="mr-2">
+                                <svg class="icon ml-2" aria-hidden="true">
+                                    <use xlink:href="#icon-chakan"></use>
+                                </svg>
+                                <span th:text="${blog.clickNum}"></span>
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-pinglun"></use>
+                                </svg>
+                                <span th:text="${blog.commentNum}"></span>
+                            </div>
+                        </div>
                     </div>
-                    <ul id="topping" class="list-group">
-                    </ul>
                 </div>
             </div>
-            <!-- 首页显示blog -->
-            <div id="left-content" class="col-md-8">
-                <ul id="blog-list" class="blog list-group">
-                </ul>
-            </div>
-            <!-- 首页显示最近用户 -->
         </div>
     </div>
+
     <div id="footer" class="container flex-column justify-content-center mt-3 mb-3">
         <p class="text-center">
             Copyright © 2019-2020 行之则易
@@ -404,19 +421,17 @@
                 </svg>
             </a>
         </p>
-        <p class="text-center">
-            <a href="http://www.beian.miit.gov.cn/" target="_blank" class="btn-link">
-                豫ICP备20002051号-1
-            </a>
-        </p>
+        <p class="text-center"><a href="http://www.beian.miit.gov.cn/" target="_blank" class="btn-link">豫ICP备20002051号-1
+        </a></p>
     </div>
+
+
+    <script src="http://at.alicdn.com/t/font_1839202_2rbnbh0ykd7.js"></script>
+    <script src="/easier/js/jquery.min.js"></script>
+    <script src="/easier/js/popper.min.js"></script>
+    <script src="/easier/js/bootstrap.min.js"></script>
+    <script src="/easier/js/sweetalert.min.js"></script>
+    <script src="/easier/js/index.js"></script>
 </div>
-<script src="http://at.alicdn.com/t/font_1839202_2rbnbh0ykd7.js"></script>
-<script src="js/jquery.min.js"></script>
-<script src="js/popper.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/sweetalert.min.js"></script>
-<script src="js/index.js"></script>
-<script src="js/home.js"></script>
 </body>
 </html>

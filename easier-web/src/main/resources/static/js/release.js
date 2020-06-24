@@ -1,4 +1,9 @@
 $(function () {
+	$("#nav-list li:eq(1) a").addClass("nav-active");
+
+	$("#title span").text("发布Blog");
+	$("#title svg use").attr("xlink:href", "#icon-biji");
+
 	//判断是否登录
 	if (null == localStorage.getItem("user")) {
 		swal({
