@@ -4,6 +4,7 @@ import cn.javak.interceptor.AuthenticationInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
+import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.validation.MessageCodesResolver;
 import org.springframework.validation.Validator;
@@ -34,8 +35,7 @@ public class InterceptorConfig implements WebMvcConfigurer {
 		
 	}
 	@Override
-	public void addCorsMappings(CorsRegistry arg0) {
-		// TODO Auto-generated method stub
+	public void addCorsMappings(CorsRegistry registry) {
 		
 	}
 	@Override
@@ -53,10 +53,13 @@ public class InterceptorConfig implements WebMvcConfigurer {
 		// TODO Auto-generated method stub
 		
 	}
+
+	/**
+	 * 配置视图
+	 * @param registry
+	 */
 	@Override
-	public void addViewControllers(ViewControllerRegistry arg0) {
-		// TODO Auto-generated method stub
-		
+	public void addViewControllers(ViewControllerRegistry registry) {
 	}
 	@Override
 	public void configureAsyncSupport(AsyncSupportConfigurer arg0) {
@@ -64,9 +67,7 @@ public class InterceptorConfig implements WebMvcConfigurer {
 		
 	}
 	@Override
-	public void configureContentNegotiation(ContentNegotiationConfigurer arg0) {
-		// TODO Auto-generated method stub
-		
+	public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
 	}
 	@Override
 	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer arg0) {

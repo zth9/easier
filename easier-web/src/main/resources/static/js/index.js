@@ -162,7 +162,7 @@ $(function () {
                         buttons: false,
                         timer: 1000,
                     }).then(function () {
-                        window.location.replace("/easier/home.html")
+                        window.location.replace("/easier/index.html")
                     });
                 }
             }
