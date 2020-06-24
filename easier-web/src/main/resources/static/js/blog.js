@@ -22,12 +22,12 @@ $(function () {
 				//获取成功
 				case 200:
 					//渲染
-					//渲染标题
-					console.log(res);
 					var objMap = res.obj;
 					var blog = objMap.blog;
 					var blogShow = $('<div id ="title-name"><h1>' + blog.topic + '</h1></div><div id="title-info" class="d-flex justify-content-end"><div class="mr-3"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-chakan"></use></svg>' + blog.clickNum + '</div><div><svg class="icon" aria-hidden="true"><use xlink:href="#icon-pinglun"></use></svg>' + blog.commentNum + '</div></div>');
 					$("#article-title").append(blogShow);
+					//渲染网站标题
+					$("#web-title").text(blog.topic);
 
 					var user = objMap.user;
 					var userShow = $('<div><img src="' + user.headPic + '" width="45" height="45" /></div><div class="ml-2"><div><a class="text-success mr-2 text-decoration-none" href="user/index/' + user.userId + '">' + user.nickName + '</a></div><div>' + blog.createTime + '</div></div>');

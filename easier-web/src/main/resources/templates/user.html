@@ -2,7 +2,7 @@
 <html lang="zh" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>个人主页</title>
+    <title th:text="${user.getNickName()} + '的主页'">个人主页</title>
     <link rel="stylesheet" href="/easier/css/bootstrap.min.css"/>
     <style type="text/css">
         .icon {
