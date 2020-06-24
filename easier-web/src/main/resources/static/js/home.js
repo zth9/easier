@@ -127,7 +127,7 @@ $(function () {
 			var keyWord = keyWordInput.val();
 			var searchRule = new RegExp(/^[a-zA-Z0-9\u4e00-\u9fa5_]{1,10}$/);
 			if (keyWord.match(searchRule)) {
-				window.location.replace("index.html?search=" + keyWord);
+				window.location.replace("/easier/index.html?search=" + keyWord);
 				return;
 			}
 			keyWordInput.val("");
@@ -259,7 +259,7 @@ $(function () {
 			buttons: false,
 			timer: 700,
 		});
-		window.location.replace("index.html");
+		window.location.replace("/easier/index.html");
 	} else {
 		loadBlog();
 	}

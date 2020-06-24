@@ -13,8 +13,8 @@
 		<script type="text/javascript">
 			//定义全局函数 用来拼接接口
 			url = function(i) {
-				// return "http://123.57.236.58:8080/easier/" + i;
-				return "http://localhost:8080/easier/" + i;
+				return "http://123.57.236.58:8080/easier/" + i;
+				// return "http://localhost:8080/easier/" + i;
 			};
 			$(function() {});
 		</script>
@@ -152,7 +152,7 @@
 		<script type="text/javascript">
 			//判断已经登陆过时,直接跳转到主页
 			if (null != localStorage.getItem("user")) {
-				window.location.replace("index.html");
+				window.location.replace("/easier/index.html");
 			}
 			$(function() {
 				//跳转到注册页
@@ -209,7 +209,7 @@
 											buttons: false,
 											timer: 1000,
 										}).then(function() {
-											window.location.replace("index.html")
+											window.location.replace("/easier/index.html")
 										});
 										break;
 									case 500:

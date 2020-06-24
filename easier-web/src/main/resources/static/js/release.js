@@ -158,7 +158,7 @@ $(function () {
 							timer: 800,
 						});
 						setInterval(function () {
-							window.location.replace("index.html")
+							window.location.replace("/easier/index.html")
 						}, 800);
 						break;
 					case 500:
