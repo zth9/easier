@@ -16,7 +16,8 @@ import java.lang.reflect.Method;
 
 
 /**
- * 注解拦截
+ * 拦截token
+ * 拦截注解{@link UserLoginToken},校验token,如未持有token或者token失效则拦截该请求
  */
 public class AuthenticationInterceptor implements HandlerInterceptor {
     @Autowired

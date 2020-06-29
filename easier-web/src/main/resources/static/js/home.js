@@ -10,6 +10,19 @@ $(function () {
 	if (null != localStorage.getItem("user")) {
 		$("#goRelease").removeClass("d-none");
 	}
+
+	loadClickNum = function () {
+		$.ajax({
+			type: 'get',
+			url: url("context/clickNum"),
+			cache: false,
+			dataType: 'json',
+			success: function (data) {
+				$("#clickNum").text(data.obj.clickNum);
+			}
+		});
+	};
+
 	//加载Blog
 	loadBlog = function () {
 		var rule = 1;
@@ -41,7 +54,6 @@ $(function () {
 					case 200:
 						//渲染Blog列表
 						var blogList = res.obj;
-						console.log(blogList);
 						for (var blog in blogList) {
 							var javaDate = blogList[blog].createTime;
 							//blogList[blog].createTime = fmtDate(new Date(javaDate), "datetime")
@@ -120,6 +132,8 @@ $(function () {
 				});
 			}
 		});
+		//加载网站点赞数
+		loadClickNum();
 	};
 	$("#search").click(function () {
 		var keyWordInput = $("#searchContent");

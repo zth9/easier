@@ -14,6 +14,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -72,10 +74,14 @@ public class BlogController {
      * @throws InterruptedException
      */
     @GetMapping
-    public RespBean load(User user, Integer rule) throws InterruptedException {
+    public RespBean load(User user, Integer rule, HttpServletRequest request) throws InterruptedException {
         //查询blog
         try {
             List<Blog> select = blogService.select(rule);
+            //增加点击量
+            ServletContext context = request.getServletContext();
+            Integer clickNum = (Integer)context.getAttribute("clickNum");
+            context.setAttribute("clickNum", ++clickNum);
             return RespBean.ok("查询成功", select);
         }catch (Exception e){
             return RespBean.error("服务器繁忙");
