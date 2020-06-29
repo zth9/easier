@@ -29,29 +29,20 @@ public class ContextController {
     private WebApplicationContext webApplicationConnect;
 
     private static final Logger logger = LoggerFactory.getLogger(ContextController.class);
+
     @GetMapping("/clickNum")
-    public RespBean getClickNum(HttpServletRequest request){
-        try {
-            ServletContext context = request.getServletContext();
-            Integer clickNum = (Integer)context.getAttribute("clickNum");
-            Map<String, Integer> map = new HashMap<>();
-            map.put("clickNum", clickNum);
-            return RespBean.ok("获取网站点击量成功", map);
-        }catch (Exception e){
-            logger.error("获取点击量失败");
-            logger.error(e.getMessage(), e);
-            return RespBean.error("获取点击量失败");
-        }
+    public RespBean getClickNum(HttpServletRequest request) {
+        ServletContext context = request.getServletContext();
+        Integer clickNum = (Integer) context.getAttribute("clickNum");
+        Map<String, Integer> map = new HashMap<>();
+        map.put("clickNum", clickNum);
+        return RespBean.ok("获取网站点击量成功", map);
     }
 
     @PreDestroy
-    public void destroy(){
-        try {
-            Integer clickNum = (Integer) webApplicationConnect.getServletContext().getAttribute("clickNum");
-            contextMapper.updateClickNum(clickNum);
-            logger.info("更新点击量成功"+clickNum);
-        }catch (Exception e){
-            logger.error("更新点击量失败", e);
-        }
+    public void destroy() {
+        Integer clickNum = (Integer) webApplicationConnect.getServletContext().getAttribute("clickNum");
+        contextMapper.updateClickNum(clickNum);
+        logger.info("更新点击量成功" + clickNum);
     }
 }

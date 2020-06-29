@@ -23,20 +23,17 @@ public class CommentController {
 
     /**
      * 新增评论
+     *
      * @param comment
      * @return
      */
     @PostMapping
     @UserLoginToken
-    public RespBean save(Comment comment){
-        try {
-            //新增评论
-            comment.setCreateTime(new Date());
-            comment.setStarNum(0);
-            commentService.insert(comment);
-            return RespBean.ok("评论成功");
-        }catch (Exception e){
-            return RespBean.error("服务器繁忙");
-        }
+    public RespBean save(Comment comment) {
+        //新增评论
+        comment.setCreateTime(new Date());
+        comment.setStarNum(0);
+        commentService.insert(comment);
+        return RespBean.ok("评论成功");
     }
 }
