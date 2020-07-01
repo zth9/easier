@@ -49,7 +49,7 @@ $(function () {
 					}
 					break;
 				case 500:
-
+					window.location.replace("/easier");
 					break;
 			}
 

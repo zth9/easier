@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 
 /**
+ * 全局异常处理
  * @author: theTian
  * @date: 2020/6/29 17:01
  */
@@ -62,12 +63,11 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = Exception.class)
     @ResponseBody
     public RespBean scheduleError(HttpServletRequest req, Exception e) throws Exception {
-        return makeErrorObj("服务器繁忙", req, e);
+        return makeErrorObj("发生未知错误", req, e);
     }
 
     /**
      * 构造错误信息
-     *
      * @param msg 错误描述
      * @param e   异常信息
      * @return

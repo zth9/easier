@@ -28,7 +28,6 @@ public class MyWebListener implements ServletContextListener {
         try {
             clickNum = contextMapper.selectClickNum();
             context.setAttribute("clickNum",clickNum);
-            context.setAttribute("contextMapper",contextMapper);
             logger.info("初始化网站点击量"+clickNum);
         }catch (Exception e){
             logger.error("获取点击量失败", e);

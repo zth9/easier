@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration  scan="true" scanPeriod="60 seconds" debug="false">
     <property name="CONSOLE_LOG_PATTERN"
-              value="%green(%d{yyyy-MM-dd HH:mm:ss}) [%thread] %highlight(%-5level) %cyan(%logger{50}:%line) --- %msg%n"/>
+              value="%green(%d{yyyy-MM-dd HH:mm:ss}) [%thread] %highlight(%-5level) %cyan(%replace(%caller{1}){'\t|Caller.{1}0|\r\n', ''}): %msg%n"/>
 
     <contextName>easier</contextName>
     <!--输出到控制台-->
