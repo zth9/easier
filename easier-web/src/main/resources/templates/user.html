@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title th:text="${user.getNickName()} + '的主页'">个人主页</title>
     <link rel="stylesheet" href="/easier/css/bootstrap.min.css"/>
     <style type="text/css">
@@ -375,11 +376,11 @@
                 <div id="blog-list" class="mt-2 d-flex flex-column justify-content-center align-items-center">
                     <div th:each="blog:${blogList}" class="input-group mb-3 justify-content-between flex-column flex-sm-row mt-3">
                         <div class="d-flex justify-content-between w-100 align-items-center">
-                            <div class="card d-flex justify-content-between bg-light w-75 text-wrap p-2">
+                            <div class="card d-flex justify-content-between bg-light w-100 text-wrap p-2">
                                 <span th:text="${blog.topic}">
                                 </span>
                             </div>
-                            <div class="ml-2" style="min-width: 150px;">
+                            <div class="ml-2" style="min-width: 15%;">
                                 <a class="btn btn-sm btn-outline-info" href="#" th:href="'/easier/blog.html?' + ${blog.getBlogId()}">
                                     查看
                                 </a>

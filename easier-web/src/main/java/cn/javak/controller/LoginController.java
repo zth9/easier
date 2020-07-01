@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -51,7 +51,9 @@ public class LoginController {
         resMap.put("user", resUser);
         String token = tokenService.getToken(resUser);
         resMap.put("token", token);
-
+        //记录最后登入时间
+        resUser.setLastLoginTime(new Date());
+        userService.update(resUser);
         return RespBean.ok("登陆成功", resMap);
     }
 }
