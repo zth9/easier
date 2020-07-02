@@ -99,9 +99,9 @@ $(function () {
 	}
 	//发布事件
 	$("#releastBtn").click(function () {
-		console.log("开始发布");
 		//校验标题&内容
 		var title = $("#title-content").val();
+		var safeTitle = filterXSS(title);
 		if (title == "") {
 			console.log("标题不能为空");
 			swal({
@@ -137,7 +137,7 @@ $(function () {
 			data: {
 				blogId: editBlogId,
 				userId: JSON.parse(localStorage.getItem("user")).userId,
-				topic: title,
+				topic: safeTitle,
 				content: content
 			},
 			beforeSend: function (req) {

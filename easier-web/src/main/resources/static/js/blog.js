@@ -76,6 +76,7 @@ $(function () {
 			text: "请输入评论内容",
 			content: "input",
 		}).then((input) => {
+
 			if (!input.replace(/&nbsp;/g, '').trim()) {
 			swal({
 				title: "输入不能为空",
@@ -85,6 +86,7 @@ $(function () {
 				timer: 500,
 			});
 		} else {
+			var safeInput = filterXSS(input);
 			$.ajax({
 				type: 'post',
 				url: url("comment"),
@@ -93,7 +95,7 @@ $(function () {
 				data: {
 					blogId: blogId,
 					userId: JSON.parse(localStorage.getItem("user")).userId,
-					content: input,
+					content: safeInput,
 				},
 				beforeSend: function (req) {
 					//设置token
