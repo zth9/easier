@@ -35,9 +35,15 @@ $(function () {
 		$("#user-email").attr("placeholder", "未绑定");
 		$("#bind-email").append('<a id="bind" class="btn btn-primary" href="#">绑定邮箱</a>');
 	}
-	//更改头像
+	//选择头像
 	$("#changePic").click(function () {
-		$("choiceFile").click
+		$("#choiceFile").click();
+	});
+	//更改显示
+	$("#choiceFile").change(function(){
+		$("#user-headPic").attr("src",URL.createObjectURL($(this)[0].files[0]));
+		$("#upload").removeClass("disabled");
+		$("#upload").removeClass("d-none");
 	});
 	function getObjectURL(file) {
 		var url = null;
@@ -50,27 +56,79 @@ $(function () {
 		}
 		return url;
 	}
+
 	//上传头像到服务器
-	function upimg() {
-		var pic = $('#upload')[0].files[0];
-		var file = new FormData();
-		file.append('avatar', pic);
+	$("#upload").click(function () {
+		var formData = new FormData();
+		formData.append("file", $("#choiceFile")[0].files[0]);
 		$.ajax({
-			url: url("mine/avatar"),
-			type: "post",
-			data: file,
-			cache: false,
-			contentType: false,
-			processData: false,
+			type: 'PUT',
+			url: url("user/uploadAvatar"),
+			data: formData,
 			beforeSend: function (req) {
 				//设置token
 				req.setRequestHeader("token", localStorage.getItem("token"));
+				$('#loadmodal').modal('show');
 			},
+			processData: false,
+			contentType: false,
 			success: function (res) {
+				switch (res.status) {
+					case 200:
+						swal({
+							title: "修改成功",
+							text: " ",
+							icon: "success",
+							buttons: false,
+							timer: 800,
+						});
+						var localUser = JSON.parse(localStorage.getItem("user"));
+						localUser.headPic = res.obj.newHeadPic;
+						localStorage.setItem("user", JSON.stringify(localUser));
+						setInterval(function () {
+							window.location.reload();
+						}, 800);
+						break;
+					case 500:
+						switch (res.msg) {
+							//token失效
+							case "tokenError":
+								getToken();
+								break;
+							//请求驳回
+							case "reject":
 
+								break;
+							default:
+								swal({
+									title: res.msg,
+									text: " ",
+									icon: "error",
+									buttons: true,
+								});
+						}
+						break;
+				}
+			},
+			complete: function () {
+				console.log("执行完成");
+
+				//完美关闭模态框
+				$('#loadmodal').modal('hide');
+				$('#loadmodal').on('shown.bs.modal', function () {
+					console.log("完全可见");
+					$('#loadmodal').modal('hide');
+				});
+			},
+			error: function () {
+				swal({
+					title: "服务器繁忙",
+					text: "请稍后重试",
+					icon: "error",
+				});
 			}
 		});
-	}
+	});
 	//更改密码
 	$("#changePwd").click(function () {
 		swal({
@@ -431,7 +489,6 @@ $(function () {
 						for (var i in blogList) {
 							blogList[i].createTime = getDateDiff(new Date(blogList[i].createTime));
 							var htmlContent = $('<div class="input-group mb-3 justify-content-between flex-column flex-sm-row mt-3"><div class="d-flex justify-content-between w-100 align-items-center"><div class="card d-flex justify-content-between bg-light w-75 text-wrap p-2"><span>' + blogList[i].topic + '</span></div><div class="ml-2" style="min-width: 150px;"><a class="btn btn-sm btn-outline-info" href="blog.html?' + blogList[i].blogId + '">查看</a><a class="btn btn-sm btn-outline-success ml-1" href="release.html?' + blogList[i].blogId + '">编辑</a><a class="btn btn-sm btn-outline-danger ml-1" href="javascript:;" onclick="deleteBlog(' + blogList[i].blogId + ')">删除</a></div></div><div class="d-flex justify-content-end align-items-center  flex-grow-1 border-bottom"><div>' + blogList[i].createTime + '</div><div class="mr-2"><svg class="icon ml-2" aria-hidden="true"><use xlink:href="#icon-chakan"></use></svg>' + blogList[i].clickNum + '<svg class="icon" aria-hidden="true"><use xlink:href="#icon-pinglun"></use></svg>' + blogList[i].commentNum +'</div></div></div>');
-							console.log(htmlContent);
 							$("#blog-list").append(htmlContent);
 						}
 					} else {

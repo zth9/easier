@@ -12,8 +12,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.util.concurrent.TimeUnit;
+import java.io.IOException;
 
 /**
  * @author: theTian
@@ -106,5 +107,11 @@ public class UserController {
             }
         }
         return RespBean.ok("修改成功", selUser);
+    }
+
+    @PutMapping("/uploadAvatar")
+    @UserLoginToken
+    public RespBean uploadAvatar(@RequestParam(required = true) MultipartFile file) throws IOException {
+        return userService.updateAvatar(file);
     }
 }

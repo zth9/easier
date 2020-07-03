@@ -355,7 +355,10 @@
 								</div>
 								<div class="mt-2">
 									<a id="changePic" class="btn btn-sm btn-success text-white">更改头像</a>
-									<input id="choiceFile" type="file" class="btn btn-sm btn-success d-none" />
+									<a id="upload" class="btn btn-sm btn-primary text-white disabled d-none">确认上传</a>
+									<form enctype="multipart/form-data">
+									    <input id="choiceFile" accept = "image/*" type="file"  class="btn btn-sm btn-success d-none" />
+									</form>
 								</div>
 							</div>
 							<div id="user-form" class=" mt-2 flex-column">

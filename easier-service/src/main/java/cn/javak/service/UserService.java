@@ -1,15 +1,23 @@
 package cn.javak.service;
 
-import cn.javak.mapper.RoleMapper;
 import cn.javak.mapper.UserMapper;
 import cn.javak.mapper.UserRoleMapper;
+import cn.javak.pojo.RespBean;
 import cn.javak.pojo.User;
 import cn.javak.pojo.UserRoleKey;
+import cn.javak.token.TokenUtil;
 import cn.javak.utils.AddressConfig;
+import cn.javak.utils.Constants;
+import cn.javak.utils.FTPUtils;
+import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.lang3.RandomUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.Date;
 
 /**
@@ -18,6 +26,7 @@ import java.util.Date;
  */
 @Service
 public class UserService {
+    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
     @Autowired
     private UserMapper userMapper;
     @Autowired
@@ -70,5 +79,31 @@ public class UserService {
 
     public User selectByUserId(Integer userId) {
         return userMapper.selectByPrimaryKey(userId);
+    }
+
+    public RespBean updateAvatar(MultipartFile file) throws IOException {
+        Integer userId = TokenUtil.getTokenUserId();
+        if (null == userId){
+            return RespBean.error("tokenError");
+        }
+        if (!file.isEmpty()) {
+            String fileName = System.currentTimeMillis() + file.getOriginalFilename();
+            boolean saveOk = FTPUtils.uploadFile(FTPUtils.loginFTP(), Constants.ADDRESS.AVATAR_ABSOLUTE_DIR, fileName, file.getInputStream());
+            if (saveOk){
+                String newAvatarAddress = Constants.ADDRESS.AVATAR_NET_ADDRESS + fileName;
+                User user = new User();
+                user.setUserId(userId);
+                user.setHeadPic(newAvatarAddress);
+                userMapper.updateByPrimaryKeySelective(user);
+                logger.info("用户"+userId+"修改头像成功,新头像为"+newAvatarAddress);
+                JSONObject object = new JSONObject();
+                object.put("newHeadPic", newAvatarAddress);
+                return RespBean.ok("修改头像成功", object);
+            }else {
+                logger.error("修改头像失败");
+                return RespBean.error("修改头像失败");
+            }
+        }
+        return RespBean.error("修改头像失败");
     }
 }
