@@ -40,7 +40,7 @@ public class UserController {
      * @return
      * @throws InterruptedException
      */
-    @PostMapping()
+    @PostMapping("")
     public RespBean signup(User user) throws InterruptedException {
         //todo 表单验证
 

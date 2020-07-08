@@ -118,7 +118,7 @@ $(function () {
 				}
 			},
 			complete: function () {
-				//完美关闭模态框
+				
 				$('#loadmodal').modal('hide');
 				$('#loadmodal').on('shown.bs.modal', function () {
 					$('#loadmodal').modal('hide');
@@ -240,7 +240,7 @@ $(function () {
 				}
 			},
 			complete: function () {
-				//完美关闭模态框
+				
 				$('#loadmodal').modal('hide');
 				$('#loadmodal').on('shown.bs.modal', function () {
 					$('#loadmodal').modal('hide');

@@ -27,7 +27,7 @@ public class CommentController {
      * @param comment
      * @return
      */
-    @PostMapping
+    @PostMapping("")
     @UserLoginToken
     public RespBean save(Comment comment) {
         //新增评论

@@ -19,7 +19,7 @@ import java.util.List;
  * @date: 2020/6/24 10:46
  */
 @Controller
-@RequestMapping("user/index")
+@RequestMapping("/user/index")
 public class UserIndexController {
     @Autowired
     private UserService userService;

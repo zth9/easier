@@ -63,7 +63,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = Exception.class)
     @ResponseBody
     public RespBean scheduleError(HttpServletRequest req, Exception e) throws Exception {
-        return makeErrorObj("发生未知错误", req, e);
+        return makeErrorObj("发生内部错误", req, e);
     }
 
     /**

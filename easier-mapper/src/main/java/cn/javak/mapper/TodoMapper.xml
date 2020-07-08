@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.javak.mapper.TodoMapper">
+  <resultMap id="BaseResultMap" type="cn.javak.pojo.Todo">
+    <id column="todo_id" jdbcType="INTEGER" property="todoId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="todo_time" jdbcType="TIMESTAMP" property="todoTime" />
+    <result column="todo_content" jdbcType="VARCHAR" property="todoContent" />
+    <result column="todo_status" jdbcType="VARCHAR" property="todoStatus" />
+    <result column="todo_type" jdbcType="VARCHAR" property="todoType" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    todo_id, user_id, todo_time, todo_content, todo_status, todo_type
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from todo
+    where todo_id = #{todoId,jdbcType=INTEGER}
+  </select>
+  <select id="selectByUserId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from todo
+    where user_id = #{userId,jdbcType=INTEGER}
+    order by todo_time asc
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from todo
+    where todo_id = #{todoId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="todo_id" keyProperty="todoId" parameterType="cn.javak.pojo.Todo" useGeneratedKeys="true">
+    insert into todo (user_id, todo_time, todo_content, 
+      todo_status, todo_type)
+    values (#{userId,jdbcType=INTEGER}, #{todoTime,jdbcType=TIMESTAMP}, #{todoContent,jdbcType=VARCHAR}, 
+      #{todoStatus,jdbcType=VARCHAR}, #{todoType,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="todo_id" keyProperty="todoId" parameterType="cn.javak.pojo.Todo" useGeneratedKeys="true">
+    insert into todo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="todoTime != null">
+        todo_time,
+      </if>
+      <if test="todoContent != null">
+        todo_content,
+      </if>
+      <if test="todoStatus != null">
+        todo_status,
+      </if>
+      <if test="todoType != null">
+        todo_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="todoTime != null">
+        #{todoTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="todoContent != null">
+        #{todoContent,jdbcType=VARCHAR},
+      </if>
+      <if test="todoStatus != null">
+        #{todoStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="todoType != null">
+        #{todoType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.javak.pojo.Todo">
+    update todo
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="todoTime != null">
+        todo_time = #{todoTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="todoContent != null">
+        todo_content = #{todoContent,jdbcType=VARCHAR},
+      </if>
+      <if test="todoStatus != null">
+        todo_status = #{todoStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="todoType != null">
+        todo_type = #{todoType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where todo_id = #{todoId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.javak.pojo.Todo">
+    update todo
+    set user_id = #{userId,jdbcType=INTEGER},
+      todo_time = #{todoTime,jdbcType=TIMESTAMP},
+      todo_content = #{todoContent,jdbcType=VARCHAR},
+      todo_status = #{todoStatus,jdbcType=VARCHAR},
+      todo_type = #{todoType,jdbcType=VARCHAR}
+    where todo_id = #{todoId,jdbcType=INTEGER}
+  </update>
+  <select id="selectAllNotRemind" resultMap="BaseResultMap">
+    select *
+    from todo
+    where todo_status='0' and todo_time = #{datetime, jdbcType=VARCHAR};
+  </select>
+</mapper>

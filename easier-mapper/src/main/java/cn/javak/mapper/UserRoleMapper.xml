@@ -33,4 +33,10 @@
       </if>
     </trim>
   </insert>
+  <select id="selectByUsername" parameterType="java.lang.String" resultType="java.lang.String">
+    SELECT r.role_name
+    from
+    user u left join user_role ur on u.user_id = ur.user_id left join role r on ur.role_id = r.role_id
+    where username = #{username, jdbcType=VARCHAR}
+  </select>
 </mapper>

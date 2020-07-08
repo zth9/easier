@@ -21,8 +21,8 @@ import java.util.Map;
  * @author: theTian
  * @date: 2020/5/31 15:10
  */
+@RequestMapping("/login")
 @RestController
-@RequestMapping("/")
 public class LoginController {
     @Autowired
     private UserService userService;
@@ -38,7 +38,7 @@ public class LoginController {
      * @return
      * @throws InterruptedException
      */
-    @PostMapping("login")
+    @PostMapping("")
     public RespBean login(User user, HttpServletResponse response) throws InterruptedException {
         //todo 表单验证
 

@@ -42,7 +42,7 @@ public class BlogController {
      * @return
      * @throws InterruptedException
      */
-    @PostMapping()
+    @PostMapping("")
     @UserLoginToken
     public RespBean save(Blog blog) throws InterruptedException {
         if (blogService.selectByBlogId(blog.getBlogId()) != null) {
@@ -87,7 +87,7 @@ public class BlogController {
      * @param id
      * @return
      */
-    @GetMapping(value = "/{id}")
+    @GetMapping(value = "{id}")
     public RespBean load(@PathVariable("id") int id) {
         Map<String, Object> resMap = blogService.clickBlog(id);
         if (resMap != null) {
@@ -102,7 +102,7 @@ public class BlogController {
      *
      * @param blog
      */
-    @PutMapping(value = "/topping/{id}")
+    @PutMapping(value = "topping/{id}")
     @UserLoginToken
     public RespBean topping(Blog blog) {
         boolean toppingSuccess = blogService.topping(blog, true);
@@ -118,7 +118,7 @@ public class BlogController {
      *
      * @param blog
      */
-    @PutMapping(value = "/unTopping/{id}")
+    @PutMapping(value = "unTopping/{id}")
     @UserLoginToken
     public RespBean unTopping(Blog blog) {
         boolean toppingSuccess = blogService.topping(blog, false);
@@ -134,7 +134,7 @@ public class BlogController {
      *
      * @return
      */
-    @GetMapping(value = "/topping")
+    @GetMapping(value = "topping")
     public RespBean loadTopping() {
         List<Blog> toppingList = blogService.selectTopping();
         return RespBean.ok("", toppingList);
@@ -146,7 +146,7 @@ public class BlogController {
      * @param user
      * @return
      */
-    @GetMapping(value = "/mine")
+    @GetMapping(value = "mine")
     @UserLoginToken
     public RespBean loadUserBlog(User user) {
         //参数验证
@@ -163,7 +163,7 @@ public class BlogController {
      * @param id 传过来博客id
      * @return
      */
-    @DeleteMapping(value = "/{id}")
+    @DeleteMapping(value = "{id}")
     @UserLoginToken
     public RespBean deleteBlogByUserIdAndBlogId(@PathVariable("id") Integer id) {
         //验证token的userId 和 博客id查询出的userId 是否一致

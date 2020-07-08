@@ -192,4 +192,10 @@
     from user
     where nick_name = #{nickName, jdbcType=VARCHAR}
   </select>
+  <select id="selectOnlyEmail" resultMap="BaseResultMap">
+    select
+    user_id, email
+    from user
+    where email != ''
+  </select>
 </mapper>

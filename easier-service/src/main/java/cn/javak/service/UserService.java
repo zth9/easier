@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.Set;
 
 /**
  * @author: theTian
@@ -31,10 +32,14 @@ public class UserService {
     private UserMapper userMapper;
     @Autowired
     private UserRoleMapper userRoleMapper;
-    //登录 by username
+    //登录 by user 取出username
     public User login(User user){
         User selUser = userMapper.selectByUsername(user.getUsername());
         return selUser;
+    }
+    //登录 by username
+    public User login(String username){
+        return userMapper.selectByUsername(username);
     }
 
     //登录 by userId
@@ -83,9 +88,6 @@ public class UserService {
 
     public RespBean updateAvatar(MultipartFile file) throws IOException {
         Integer userId = TokenUtil.getTokenUserId();
-        if (null == userId){
-            return RespBean.error("tokenError");
-        }
         if (!file.isEmpty()) {
             String fileName = System.currentTimeMillis() + file.getOriginalFilename();
             boolean saveOk = FTPUtils.uploadFile(FTPUtils.loginFTP(), Constants.ADDRESS.AVATAR_ABSOLUTE_DIR, fileName, file.getInputStream());
@@ -105,5 +107,10 @@ public class UserService {
             }
         }
         return RespBean.error("修改头像失败");
+    }
+
+
+    public Set<String> getRoles(String username) {
+        return userRoleMapper.selectByUsername(username);
     }
 }

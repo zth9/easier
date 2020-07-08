@@ -13,7 +13,7 @@ import java.util.Date;
  * @date: 2020/3/17 15:31
  */
 public class DateUtils {
-    private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+    private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     /**
      * 仅显示年月日，例如 2015-08-11.
      */

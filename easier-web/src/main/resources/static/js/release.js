@@ -78,7 +78,7 @@ $(function () {
 				complete: function () {
 					console.log("执行完成");
 
-					//完美关闭模态框
+					
 					$('#loadmodal').modal('hide');
 					$('#loadmodal').on('shown.bs.modal', function () {
 						console.log("完全可见");
@@ -171,7 +171,7 @@ $(function () {
 				console.log("执行完成");
 				$("#ContentPlaceHolder1_submit").attr('disabled', false);
 
-				//完美关闭模态框
+				
 				$('#loadmodal').modal('hide');
 				$('#loadmodal').on('shown.bs.modal', function () {
 					$('#loadmodal').modal('hide');

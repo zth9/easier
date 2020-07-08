@@ -20,9 +20,9 @@ import java.util.List;
  */
 public class FTPUtils {
 
-    private static String host = "";
-    private static String username = "";
-    private static String password = "";
+    private static String host = "123.57.236.58";
+    private static String username = "ftpuser";
+    private static String password = "zZ+411023";
     private static int port = 21;
 
     private static final Logger log = LoggerFactory.getLogger(FTPUtils.class);
@@ -135,7 +135,7 @@ public class FTPUtils {
             createDirecroty(ftpClient,serviceDec);
             ftpClient.makeDirectory(serviceDec);
             ftpClient.changeWorkingDirectory(serviceDec);
-
+            //使用utf-8编码 否则会出现乱码
             fileName = new String(fileName.getBytes(StandardCharsets.UTF_8), StandardCharsets.ISO_8859_1);
 
             ftpClient.storeFile(fileName, inputStream);

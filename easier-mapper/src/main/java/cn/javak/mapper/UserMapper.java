@@ -24,4 +24,6 @@ public interface UserMapper {
     User selectByEmail(String email);
 
     User selectByNN(String nickName);
+
+    List<User> selectOnlyEmail();
 }

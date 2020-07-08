@@ -19,6 +19,11 @@ $(function () {
 			$("#adv").addClass('show');
 			$("#adv").addClass('active');
 			break;
+		case "todo":
+			$("#todo-manage").addClass('active');
+			$("#todo").addClass('show');
+			$("#todo").addClass('active');
+			break;
 		default:
 			$("#blog-manage").addClass('active');
 			$("#blog-m").addClass('show');
@@ -113,7 +118,7 @@ $(function () {
 			complete: function () {
 				console.log("执行完成");
 
-				//完美关闭模态框
+				
 				$('#loadmodal').modal('hide');
 				$('#loadmodal').on('shown.bs.modal', function () {
 					console.log("完全可见");
@@ -237,7 +242,7 @@ $(function () {
 				complete: function () {
 					console.log("执行完成");
 
-					//完美关闭模态框
+					
 					$('#loadmodal').modal('hide');
 					$('#loadmodal').on('shown.bs.modal', function () {
 						console.log("完全可见");
@@ -341,7 +346,7 @@ $(function () {
 			},
 			complete: function () {
 
-				//完美关闭模态框
+				
 				$('#loadmodal').modal('hide');
 				$('#loadmodal').on('shown.bs.modal', function () {
 					$('#loadmodal').modal('hide');
@@ -449,7 +454,7 @@ $(function () {
 			},
 			complete: function () {
 
-				//完美关闭模态框
+				
 				$('#loadmodal').modal('hide');
 				$('#loadmodal').on('shown.bs.modal', function () {
 					console.log("完全可见");
@@ -513,7 +518,7 @@ $(function () {
 			}
 		},
 		complete: function () {
-			//完美关闭模态框
+			
 			$('#loadmodal').modal('hide');
 			$('#loadmodal').on('shown.bs.modal', function () {
 				$('#loadmodal').modal('hide');
@@ -587,7 +592,7 @@ $(function () {
 					complete: function () {
 						console.log("执行完成");
 
-						//完美关闭模态框
+						
 						$('#loadmodal').modal('hide');
 						$('#loadmodal').on('shown.bs.modal', function () {
 							console.log("完全可见");
@@ -609,4 +614,254 @@ $(function () {
 	)
 	};
 
+	//获取用户待办列表
+	$.ajax({
+		type: 'get',
+		url: url("todo"),
+		cache: false,
+		dataType: 'json',
+		beforeSend: function (req) {
+			//设置token
+			req.setRequestHeader("token", localStorage.getItem("token"));
+		},
+		success: function (data) {
+			var res = data;
+			switch (res.status) {
+				case 200:
+					var todoList = res.obj;
+					if (todoList.length > 0) {
+						for (var i in todoList) {
+							var curTodo = todoList[i];
+							var curTodoStatus = curTodo.todoStatus;
+							var curTodoType = curTodo.todoType;
+							// curTodo.todoTime = getDateDiff()
+							if (curTodoStatus==0){
+								//正在路上
+								if (curTodoType==0){
+									$("#todo-going-c").append('<div class="going-item d-flex w-100 justify-content-between border-bottom"><div class="w-75 d-flex justify-content-between"><div class="input-group mb-3 justify-content-between flex-column flex-sm-row mt-3"><div class="d-flex justify-content-between w-100 align-items-center"><div class="card d-flex justify-content-between bg-light w-100 text-wrap p-2 mr-1"><span id="todoContent'+curTodo.todoId+'">'+curTodo.todoContent+'</span></div></div></div><div class="d-flex align-items-center"><div class="mr-1 d-flex justify-content-center align-content-center"><span class="todo-time bg-light d-flex justify-content-center align-items-center rounded text-nowrap" id="todoTime'+curTodo.todoId+'">'+curTodo.todoTime+'</span></div><svg class="icon d-flex justify-content-center align-content-center" style="font-size:13px" aria-hidden="true"><use xlink:href="#icon-qiandao"></use></svg></div></div><div class="w-25 d-flex justify-content-center"><div class="mr-1 d-flex align-items-center"><a class="btn btn-sm btn-outline-success text-success text-nowrap"  onclick="editTodo('+curTodo.todoId+')">编辑</a></div><div class="d-flex align-items-center"><a class="btn btn-sm btn-outline-danger text-danger text-nowrap"  onclick="deleteTodo('+curTodo.todoId+')">删除</a></div></div></div>');
+								}else {
+									$("#todo-going-c").append('<div class="going-item d-flex w-100 justify-content-between border-bottom"><div class="w-75 d-flex justify-content-between"><div class="input-group mb-3 justify-content-between flex-column flex-sm-row mt-3"><div class="d-flex justify-content-between w-100 align-items-center"><div class="card d-flex justify-content-between bg-light w-100 text-wrap p-2 mr-1"><span id="todoContent'+curTodo.todoId+'">'+curTodo.todoContent+'</span></div></div></div><div class="d-flex align-items-center"><div class="mr-1 d-flex justify-content-center align-content-center"><span class="todo-time bg-light d-flex justify-content-center align-items-center rounded text-nowrap" id="todoTime'+curTodo.todoId+'">'+curTodo.todoTime+'</span></div><svg class="icon d-flex justify-content-center align-content-center" style="font-size:13px" aria-hidden="true"><use xlink:href="#icon-zhouqi"></use></svg></div></div><div class="w-25 d-flex justify-content-center"><div class="mr-1 d-flex align-items-center"><a class="btn btn-sm btn-outline-success text-success text-nowrap"  onclick="editTodo('+curTodo.todoId+')">编辑</a></div><div class="d-flex align-items-center"><a class="btn btn-sm btn-outline-danger text-danger text-nowrap"  onclick="deleteTodo('+curTodo.todoId+')">删除</a></div></div></div>');
+								}
+							}else {
+								//阵亡
+								if (curTodoType==0){
+									$("#todo-death-c").append('<div class="going-item d-flex w-100 justify-content-between border-bottom"><div class="w-75 d-flex justify-content-between"><div class="input-group mb-3 justify-content-between flex-column flex-sm-row mt-3"><div class="d-flex justify-content-between w-100 align-items-center"><div class="card d-flex justify-content-between bg-light w-100 text-wrap p-2 mr-1"><span id="todoContent'+curTodo.todoId+'">'+curTodo.todoContent+'</span></div></div></div><div class="d-flex align-items-center"><div class="mr-1 d-flex justify-content-center align-content-center"><span class="todo-time bg-light d-flex justify-content-center align-items-center rounded text-nowrap" id="todoTime'+curTodo.todoId+'">'+curTodo.todoTime+'</span></div><svg class="icon d-flex justify-content-center align-content-center" style="font-size:13px" aria-hidden="true"><use xlink:href="#icon-qiandao"></use></svg></div></div><div class="w-25 d-flex justify-content-center"><div class="d-flex align-items-center"><a class="btn btn-sm btn-outline-danger text-danger text-nowrap"  onclick="deleteTodo('+curTodo.todoId+')">删除</a></div></div></div>');
+								}else {
+									$("#todo-death-c").append('<div class="going-item d-flex w-100 justify-content-between border-bottom"><div class="w-75 d-flex justify-content-between"><div class="input-group mb-3 justify-content-between flex-column flex-sm-row mt-3"><div class="d-flex justify-content-between w-100 align-items-center"><div class="card d-flex justify-content-between bg-light w-100 text-wrap p-2 mr-1"><span id="todoContent'+curTodo.todoId+'">'+curTodo.todoContent+'</span></div></div></div><div class="d-flex align-items-center"><div class="mr-1 d-flex justify-content-center align-content-center"><span class="todo-time bg-light d-flex justify-content-center align-items-center rounded text-nowrap" id="todoTime'+curTodo.todoId+'">'+curTodo.todoTime+'</span></div><svg class="icon d-flex justify-content-center align-content-center" style="font-size:13px" aria-hidden="true"><use xlink:href="#icon-zhouqi"></use></svg></div></div><div class="w-25 d-flex justify-content-center"><div class="d-flex align-items-center"><a class="btn btn-sm btn-outline-danger text-danger text-nowrap"  onclick="deleteTodo('+curTodo.todoId+')">删除</a></div></div></div>');
+								}
+							}
+						}
+					}
+					break;
+				case 500:
+					switch (res.msg) {
+						//token失效
+						case "tokenError":
+							getToken();
+							break;
+						default:
+							console.log("服务器繁忙")
+					}
+					break;
+			}
+		},
+		error: function () {
+			console.log("服务器繁忙")
+		}
+	});
+	//编辑待办
+	editTodo = function(todoId){
+		$("#add-Modal").modal('show');
+		alert("$('#todoContent'+todoId).val()"+$('#todoContent'+todoId).text());
+		$("#todo-content").val($('#todoContent'+todoId).text());
+		alert("$('#todoTime'+todoId).val()"+$('#todoTime'+todoId).text());
+		$("#picker").val($('#todoTime'+todoId).text());
+		globalTodoId = todoId;
+	};
+
+	//删除待办
+	deleteTodo = function (todoId) {
+		swal({
+			title: "确定要删除么?",
+			text: "一旦删除,不可恢复",
+			icon: "warning",
+			buttons: {
+				cancel: "取消",
+				confirm: "确认"
+			},
+			dangerMode: true,
+		}).then((willDelete) => {
+				if (willDelete) {
+					$.ajax({
+						type: 'delete',
+						url: url("todo/"+todoId),
+						cache: false,
+						dataType: 'json',
+						beforeSend: function (req) {
+							//设置token
+							req.setRequestHeader("token", localStorage.getItem("token"));
+							$('#loadmodal').modal('show');
+						},
+						success: function (data) {
+							var res = data;
+							switch (res.status) {
+								case 200:
+									swal({
+										title: "删除成功",
+										text: " ",
+										icon: "success",
+										buttons: false,
+										timer: 800,
+									});
+									setInterval(function () {
+										window.location.reload();
+									}, 800);
+									break;
+								case 500:
+									switch (res.msg) {
+										//token失效
+										case "tokenError":
+											getToken();
+											break;
+										case "reject":
+											swal({
+												title: "非法操作",
+												text: " ",
+												icon: "success",
+												buttons: false,
+												timer: 800,
+											});
+											break;
+										default:
+											swal({
+												title: res.msg,
+												text: " ",
+												icon: "error",
+												buttons: false,
+												timer: 800,
+											});
+									}
+									break;
+							}
+
+						},
+						complete: function () {
+							
+							$('#loadmodal').modal('hide');
+							$('#loadmodal').on('shown.bs.modal', function () {
+								console.log("完全可见");
+								$('#loadmodal').modal('hide');
+							});
+						},
+						error: function () {
+							swal({
+								title: "服务器繁忙",
+								text: "请稍后重试",
+								icon: "error",
+							});
+						}
+					});
+				}
+			}
+		)
+	};
+	//提交待办
+	$("#submit-todo").click(function () {
+		var todoContent = $("#todo-content").val();
+		if (!todoContent.replace(/&nbsp;/g, '').trim()) {
+			swal({
+				title: "输入不能为空",
+				text: " ",
+				icon: "warning",
+				buttons: false,
+				timer: 500,
+			});
+			return;
+		}
+		var todoTime = $("#picker").val();
+		var curDate = new Date();
+		var targetTodoTime = new Date(todoTime);
+		if (!todoTime.replace(/&nbsp;/g, '').trim() || targetTodoTime.getTime()<curDate.getTime()){
+			swal({
+				title: "提醒时间不合法",
+				text: " ",
+				icon: "warning",
+				buttons: false,
+				timer: 500,
+			});
+			return;
+		}
+
+		var safeTodoContent = filterXSS(todoContent);
+		var todoType = $("#repeat-radio input[name='repeat']:checked").val();
+
+		//ajax新增提醒
+		$.ajax({
+			type: 'post',
+			url: url("todo"),
+			cache: false,
+			dataType: 'json',
+			data: {
+				todoId: globalTodoId,
+				todoTimeStr: todoTime,
+				todoContent: safeTodoContent,
+				todoType: todoType
+			},
+			beforeSend: function (req) {
+				//设置token
+				req.setRequestHeader("token", localStorage.getItem("token"));
+				//清空globalTodoId
+				globalTodoId = "";
+				$('#add-Modal').modal('hide');
+				$('#loadmodal').modal('show');
+			},
+			success: function (data) {
+				var res = data;
+				switch (res.status) {
+					case 200:
+						swal({
+							title: res.msg,
+							text: " ",
+							icon: "success",
+							buttons: false,
+							timer: 1000,
+						});
+						//更改localStroage
+						setInterval(function () {
+							window.location.replace("mine.html?todo");
+						}, 800);
+						break;
+					case 500:
+						switch (res.msg) {
+							//token失效
+							case "tokenError":
+								getToken();
+								break;
+							default:
+								swal({
+									title: res.msg,
+									text: " ",
+									icon: "error",
+									buttons: true,
+								});
+						}
+						break;
+				}
+			},
+			complete: function () {
+				
+				$('#loadmodal').modal('hide');
+				$('#loadmodal').on('shown.bs.modal', function () {
+					$('#loadmodal').modal('hide');
+				});
+			},
+			error: function () {
+				swal({
+					title: "服务器繁忙",
+					text: "请稍后重试",
+					icon: "error",
+				});
+			}
+		});
+	});
 });

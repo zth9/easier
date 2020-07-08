@@ -3,7 +3,7 @@
 	<head>
 		<title>注册账号</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 		<link rel="stylesheet" href="css/bootstrap.min.css" />
 		<script src="http://at.alicdn.com/t/font_1839202_2rbnbh0ykd7.js"></script>
 		<script src="js/jquery.min.js"></script>
@@ -11,14 +11,7 @@
 
 		<script src="js/bootstrap.min.js"></script>
 		<script src="js/sweetalert.min.js"></script>
-		<script type="text/javascript">
-			//定义全局函数 用来拼接接口
-			url = function(i) {
-				return "http://123.57.236.58:8080/easier/" + i;
-				// return "http://localhost:8080/easier/" + i;
-			};
-			$(function() {});
-		</script>
+		<script src="js/context.js"></script>
 		<style type="text/css">
 			.icon {
 				width: 1.5em;
@@ -268,7 +261,7 @@
 									</svg>
 								</span>
 							</div>
-							<input type="text" ID="username" runat="server" Class="form-control" placeholder="用户名"></input>
+							<input type="text" ID="username" runat="server" Class="form-control" autocomplete="off" placeholder="用户名"/>
 
 						</div>
 						<div class="input-group mb-2">
@@ -281,7 +274,7 @@
 									</svg>
 								</span>
 							</div>
-							<input type="password" ID="password" runat="server" Class="form-control" placeholder="密码" ></input>
+							<input type="password" ID="password" runat="server" Class="form-control" autocomplete="off" placeholder="密码" />
 						</div>
 						<div class="input-group mb-2">
 						</div>
@@ -293,7 +286,7 @@
 									</svg>
 								</span>
 							</div>
-							<input type="password" ID="passwordAgain" Class="form-control" placeholder="重复密码"></input>
+							<input type="password" ID="passwordAgain" Class="form-control" autocomplete="off" placeholder="重复密码"/>
 						</div>
 						<div class="input-group mb-2">
 						</div>

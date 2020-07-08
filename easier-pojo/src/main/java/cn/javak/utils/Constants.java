@@ -18,4 +18,25 @@ public class Constants {
         //头像外链
         String AVATAR_NET_ADDRESS = "http://123.57.236.58/easier/user/avatar/";
     }
+
+    /**
+     * 待办状态码
+     */
+    public interface TODO{
+        //正在路上
+        String NOT_REMIND = "0";
+        //已阵亡
+        String REMINDED = "1";
+        //仅提醒一次
+        String ONCE = "0";
+        //每天都提醒
+        String EVERYDAY = "1";
+    }
+
+    /**
+     * 时间常量
+     */
+    public interface DATE{
+        long ONE_DAY_MILLISECONDS = 1000 * 60 * 60 * 24;
+    }
 }

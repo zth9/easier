@@ -25,6 +25,7 @@ import java.lang.reflect.Method;
 public class AuthenticationInterceptor implements HandlerInterceptor {
     @Autowired
     private TokenService tokenService;
+
     private static final Logger logger = LoggerFactory.getLogger(AuthenticationInterceptor.class);
 
     public String getPath(ServletRequest request) {
@@ -38,7 +39,6 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
 
 //        logger.info(getPath(request)+"进入拦截器");
 
-        String token = request.getHeader("token");// 从 http 请求头中取出 token
         // 如果不是映射到方法直接通过
         if (!(object instanceof HandlerMethod)) {
 //            logger.info(getPath(request)+"不是映射到方法直接通过");
@@ -54,6 +54,8 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
                 return true;
             }
         }
+
+        String token = request.getHeader("token");// 从 http 请求头中取出 token
         //检查有没有需要用户权限的注解
         if (method.isAnnotationPresent(UserLoginToken.class)) {
             UserLoginToken userLoginToken = method.getAnnotation(UserLoginToken.class);
