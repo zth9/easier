@@ -1,11 +1,13 @@
 package cn.javak.pojo;
 
 
+import java.io.Serializable;
+
 /**
  * tgroup
  * @author 
  */
-public class Tgroup {
+public class Tgroup implements Serializable {
     private Integer tgroupId;
 
     private String tgroupName;

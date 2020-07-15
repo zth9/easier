@@ -1,12 +1,13 @@
-package cn.javak.service;
+package cn.javak.service.impl;
 
 import cn.javak.mapper.*;
 import cn.javak.pojo.Blog;
 import cn.javak.pojo.BlogTagKey;
 import cn.javak.pojo.Comment;
 import cn.javak.pojo.User;
+import cn.javak.service.BlogService;
+import org.apache.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import java.util.HashMap;
@@ -18,7 +19,7 @@ import java.util.Map;
  * @date: 2020/6/2 0:41
  */
 @Service
-public class BlogService {
+public class BlogServiceImpl implements BlogService {
     @Autowired
     private BlogMapper blogMapper;
 
@@ -31,6 +32,7 @@ public class BlogService {
     @Autowired
     private CommentMapper commentMapper;
 
+    @Override
     public void save(Blog blog) {
         blogMapper.insert(blog);
     }
@@ -39,6 +41,7 @@ public class BlogService {
      * 默认按照时间从大到小顺序 不查询content 用于首页显示
      * @return
      */
+    @Override
     public List<Blog> select(Integer rule) {
         List<Blog> blogList = null;
         if (rule == 1){
@@ -76,6 +79,7 @@ public class BlogService {
      * @param id blogId
      * @return
      */
+    @Override
     public Map<String, Object> clickBlog(int id) {
         Blog blog = blogMapper.selectByPrimaryKey(id);
         if (blog == null){
@@ -110,6 +114,7 @@ public class BlogService {
      * @param isTopping true表示置顶操作 false表示取消置顶操作
      * @return
      */
+    @Override
     public boolean topping(Blog blog, boolean isTopping) {
         //先查询是否已经置顶
         List<BlogTagKey> blogTagKeyList = blogTagMapper.selectByBlogId(blog.getBlogId());
@@ -149,6 +154,7 @@ public class BlogService {
      * 获取置顶文章
      * @return
      */
+    @Override
     public List<Blog> selectTopping(){
         return blogMapper.selectTopping();
     }
@@ -159,10 +165,12 @@ public class BlogService {
      * @param user
      * @return
      */
+    @Override
     public List<Blog> selectByUser(User user){
         return blogMapper.selectByUserId(user.getUserId());
     }
 
+    @Override
     public void delete(Integer tokenUserId, Integer id) throws Exception {
         Blog blog = blogMapper.selectByPrimaryKey(id);
         if (!tokenUserId.equals(blog.getUserId())){
@@ -179,14 +187,17 @@ public class BlogService {
         blogMapper.deleteByPrimaryKey(id);
     }
 
+    @Override
     public Blog selectByBlogId(Integer id) {
         return blogMapper.selectByPrimaryKey(id);
     }
 
+    @Override
     public void update(Blog blog) {
         blogMapper.updateByPrimaryKeySelective(blog);
     }
 
+    @Override
     public List<Blog> selectByKeyWord(String keyWord) {
         List<Blog> blogList = blogMapper.selectByKeyWord(keyWord);
         List<User> users = userMapper.selectOnlyInfo();

@@ -1,10 +1,12 @@
 package cn.javak.pojo;
 
+import java.io.Serializable;
+
 /**
  * user_blog_cs
  * @author 
  */
-public class UserBlogCsKey {
+public class UserBlogCsKey  implements Serializable {
     private Integer userId;
 
     private Integer blogId;

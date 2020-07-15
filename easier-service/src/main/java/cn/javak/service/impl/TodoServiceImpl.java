@@ -1,15 +1,17 @@
-package cn.javak.service;
+package cn.javak.service.impl;
 
 import cn.javak.mapper.TodoMapper;
 import cn.javak.mapper.UserMapper;
 import cn.javak.pojo.Todo;
 import cn.javak.pojo.User;
+import cn.javak.service.MailService;
+import cn.javak.service.TodoService;
 import cn.javak.utils.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.task.TaskExecutor;
-import org.springframework.stereotype.Service;
+import org.apache.dubbo.config.annotation.Service;
 import org.springframework.util.CollectionUtils;
 
 import java.text.SimpleDateFormat;
@@ -23,8 +25,8 @@ import java.util.List;
  * @date: 2020/7/7 16:20
  */
 @Service
-public class TodoService {
-    private static final Logger logger = LoggerFactory.getLogger(TodoService.class);
+public class TodoServiceImpl implements TodoService {
+    private static final Logger logger = LoggerFactory.getLogger(TodoServiceImpl.class);
     @Autowired
     private TodoMapper todoMapper;
     @Autowired
@@ -40,6 +42,7 @@ public class TodoService {
      * @param userId
      * @return
      */
+    @Override
     public List<Todo> selectByUserId(Integer userId) {
         List<Todo> todoList = todoMapper.selectByUserId(userId);
         return todoList;
@@ -51,6 +54,7 @@ public class TodoService {
      * @param todoId
      * @return
      */
+    @Override
     public Todo selectByTodoId(Integer todoId) {
         return todoMapper.selectByPrimaryKey(todoId);
     }
@@ -61,6 +65,7 @@ public class TodoService {
      * @param todo
      * @return
      */
+    @Override
     public int save(Todo todo) {
         int res = todoMapper.insert(todo);
         return res;
@@ -72,6 +77,7 @@ public class TodoService {
      * @param todo
      * @return
      */
+    @Override
     public int update(Todo todo) {
         return todoMapper.updateByPrimaryKeySelective(todo);
     }
@@ -82,6 +88,7 @@ public class TodoService {
      * @param todoId
      * @return
      */
+    @Override
     public int delete(Integer todoId) {
         return todoMapper.deleteByPrimaryKey(todoId);
     }
@@ -89,6 +96,7 @@ public class TodoService {
     /**
      * 执行提醒任务
      */
+    @Override
     public void scheduleTodo() {
         Calendar instance = Calendar.getInstance();
         instance.set(Calendar.SECOND, 0);

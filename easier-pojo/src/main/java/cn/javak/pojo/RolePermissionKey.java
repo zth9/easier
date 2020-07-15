@@ -1,11 +1,13 @@
 package cn.javak.pojo;
 
 
+import java.io.Serializable;
+
 /**
  * role_permission
  * @author 
  */
-public class RolePermissionKey {
+public class RolePermissionKey implements Serializable {
     private Integer roleId;
 
     private Integer permissionId;

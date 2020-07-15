@@ -1,10 +1,12 @@
 package cn.javak.pojo;
 
+import java.io.Serializable;
+
 /**
  * tag
  * @author 
  */
-public class Tag{
+public class Tag implements Serializable {
     private Integer tagId;
 
     private Integer tgroupId;

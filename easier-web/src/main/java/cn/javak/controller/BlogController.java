@@ -5,12 +5,12 @@ import cn.javak.pojo.Blog;
 import cn.javak.pojo.RespBean;
 import cn.javak.pojo.User;
 import cn.javak.service.BlogService;
-import cn.javak.service.CommentService;
 import cn.javak.service.UserService;
+import cn.javak.service.CommentService;
 import cn.javak.token.TokenUtil;
+import org.apache.dubbo.config.annotation.Reference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.ServletContext;
@@ -26,11 +26,11 @@ import java.util.Map;
 @RestController
 @RequestMapping("/blog")
 public class BlogController {
-    @Autowired
+    @Reference
     private BlogService blogService;
-    @Autowired
+    @Reference
     private UserService userService;
-    @Autowired
+    @Reference
     private CommentService commentService;
 
     private static final Logger logger = LoggerFactory.getLogger(BlogController.class);

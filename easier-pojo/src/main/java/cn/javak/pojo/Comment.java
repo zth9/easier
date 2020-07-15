@@ -2,13 +2,14 @@ package cn.javak.pojo;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * comment
  * @author 
  */
-public class Comment {
+public class Comment  implements Serializable {
     private Integer commentId; // 评论id
 
     private Integer blogId; // 博客id

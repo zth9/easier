@@ -2,6 +2,7 @@ package cn.javak.config.realm;
 
 import cn.javak.pojo.User;
 import cn.javak.service.UserService;
+import org.apache.dubbo.config.annotation.Reference;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -11,14 +12,13 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * @author: theTian
  * @date: 2020/7/6 10:51
  */
 public class EasierRealm extends AuthorizingRealm {
-    @Autowired
+    @Reference
     private UserService userService;
     /**
      * 用来为当前登陆成功的用户授予权限和角色

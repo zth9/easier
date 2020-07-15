@@ -1,11 +1,12 @@
-package cn.javak.service;
+package cn.javak.service.impl;
 
 import cn.javak.mapper.BlogMapper;
 import cn.javak.mapper.CommentMapper;
 import cn.javak.pojo.Blog;
 import cn.javak.pojo.Comment;
+import cn.javak.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.apache.dubbo.config.annotation.Service;
 
 import java.util.List;
 
@@ -14,7 +15,7 @@ import java.util.List;
  * @date: 2020/6/13 23:57
  */
 @Service
-public class CommentService {
+public class CommentServiceImpl implements CommentService {
     @Autowired
     private CommentMapper commentMapper;
     @Autowired
@@ -24,6 +25,7 @@ public class CommentService {
      * 新增评论
      * @param comment
      */
+    @Override
     public void insert(Comment comment){
         //拆入评论
         commentMapper.insertSelective(comment);
@@ -34,6 +36,7 @@ public class CommentService {
         blogMapper.updateByPrimaryKeySelective(blog);
     }
 
+    @Override
     public List<Comment> selByBlogId(int blogId){
         return commentMapper.selectByBlogId(blogId);
     }

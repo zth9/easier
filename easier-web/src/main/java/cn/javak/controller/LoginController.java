@@ -2,8 +2,8 @@ package cn.javak.controller;
 
 import cn.javak.pojo.RespBean;
 import cn.javak.pojo.User;
-import cn.javak.service.TokenService;
 import cn.javak.service.UserService;
+import org.apache.dubbo.config.annotation.Reference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,10 +24,10 @@ import java.util.Map;
 @RequestMapping("/login")
 @RestController
 public class LoginController {
-    @Autowired
+    @Reference
     private UserService userService;
     @Autowired
-    private TokenService tokenService;
+    private TokenController tokenController;
 
     private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
     /**
@@ -49,7 +49,7 @@ public class LoginController {
         logger.info("用户["+user.getUsername()+"]开始登陆");
         Map<String, Object> resMap = new HashMap<>();
         resMap.put("user", resUser);
-        String token = tokenService.getToken(resUser);
+        String token = tokenController.getToken(resUser);
         resMap.put("token", token);
         //记录最后登入时间
         resUser.setLastLoginTime(new Date());

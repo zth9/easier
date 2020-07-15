@@ -1,10 +1,12 @@
 package cn.javak.pojo;
 
+import java.io.Serializable;
+
 /**
  * blog_tag
  * @author 
  */
-public class BlogTagKey {
+public class BlogTagKey  implements Serializable {
     private Integer blogId;
 
     private Integer tagId;

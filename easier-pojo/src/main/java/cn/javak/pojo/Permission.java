@@ -1,11 +1,13 @@
 package cn.javak.pojo;
 
 
+import java.io.Serializable;
+
 /**
  * permission
  * @author 
  */
-public class Permission{
+public class Permission implements Serializable {
     private Integer permissionId;
 
     private String url;

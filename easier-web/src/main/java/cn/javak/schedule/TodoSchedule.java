@@ -1,6 +1,7 @@
 package cn.javak.schedule;
 
 import cn.javak.service.TodoService;
+import org.apache.dubbo.config.annotation.Reference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class TodoSchedule {
-    @Autowired
+    @Reference
     private TodoService todoService;
 
     private static final Logger logger = LoggerFactory.getLogger(TodoSchedule.class);

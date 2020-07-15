@@ -7,6 +7,7 @@ import cn.javak.service.MailService;
 import cn.javak.service.UserService;
 import cn.javak.token.TokenUtil;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.dubbo.config.annotation.Reference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +24,9 @@ import java.io.IOException;
 @RestController
 @RequestMapping("/user")
 public class UserController {
-    @Autowired
+    @Reference
     private UserService userService;
-    @Autowired
+    @Reference
     private MailService mailService;
 
     @Autowired
@@ -112,6 +113,7 @@ public class UserController {
     @PutMapping("/uploadAvatar")
     @UserLoginToken
     public RespBean uploadAvatar(@RequestParam(required = true) MultipartFile file) throws IOException {
-        return userService.updateAvatar(file);
+        Integer tokenUserId = TokenUtil.getTokenUserId();
+        return userService.updateAvatar(file, tokenUserId);
     }
 }

@@ -2,9 +2,10 @@ package cn.javak.interceptor;
 
 import cn.javak.annotation.PassToken;
 import cn.javak.annotation.UserLoginToken;
+import cn.javak.controller.TokenController;
 import cn.javak.pojo.RespBean;
-import cn.javak.service.TokenService;
 import com.alibaba.fastjson.JSON;
+import org.apache.dubbo.config.annotation.Reference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ import java.lang.reflect.Method;
  */
 public class AuthenticationInterceptor implements HandlerInterceptor {
     @Autowired
-    private TokenService tokenService;
+    private TokenController tokenController;
 
     private static final Logger logger = LoggerFactory.getLogger(AuthenticationInterceptor.class);
 
@@ -61,7 +62,7 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
             UserLoginToken userLoginToken = method.getAnnotation(UserLoginToken.class);
             if (userLoginToken.required()) {
                 // 验证token
-                if (token == null || !tokenService.verity()) {
+                if (token == null || !tokenController.verity()) {
                     String res = JSON.toJSONString(RespBean.error("tokenError"));
                     response.getWriter().print(res);
 //                    logger.info(getPath(request)+"tokenError 驳回");

@@ -1,10 +1,12 @@
 package cn.javak.pojo;
 
+import java.io.Serializable;
+
 /**
  * @author: theTian
  * @date: 2020/5/27 23:41
  */
-public class RespBean {
+public class RespBean implements Serializable {
     private Integer status;
     private String msg;
     private Object obj;

@@ -1,18 +1,19 @@
-package cn.javak.service;
+package cn.javak.service.impl;
 
+import cn.javak.service.MailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.stereotype.Service;
+import org.apache.dubbo.config.annotation.Service;
 
 /**
  * @author: theTian
  * @date: 2020/6/12 15:59
  */
-@Service
-public class MailService{
+@Service(timeout = 100000)
+public class MailServiceImpl implements MailService {
 
     @Autowired
     private JavaMailSender mailSender;
@@ -20,7 +21,8 @@ public class MailService{
     @Value("${spring.mail.username}")
     private String from;
 
-    public void sendSimpleMail(String receiver, String subject, String content) throws MailException {
+    @Override
+    public void sendSimpleMail(String receiver, String subject, String content) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(from); // 邮件发送者
         message.setTo(receiver); // 邮件接受者

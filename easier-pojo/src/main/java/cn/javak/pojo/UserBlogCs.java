@@ -1,5 +1,7 @@
 package cn.javak.pojo;
 
+import java.io.Serializable;
+
 /**
  * user_blog_cs
  * @author 

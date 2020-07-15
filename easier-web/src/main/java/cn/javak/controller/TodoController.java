@@ -7,10 +7,10 @@ import cn.javak.service.TodoService;
 import cn.javak.token.TokenUtil;
 import cn.javak.utils.Constants;
 import com.alibaba.fastjson.JSON;
+import org.apache.dubbo.config.annotation.Reference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,7 +27,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/todo")
 public class TodoController {
-    @Autowired
+    @Reference
     private TodoService todoService;
     private static final Logger logger = LoggerFactory.getLogger(TodoController.class);
 

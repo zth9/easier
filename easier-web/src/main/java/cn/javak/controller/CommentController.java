@@ -4,7 +4,7 @@ import cn.javak.annotation.UserLoginToken;
 import cn.javak.pojo.Comment;
 import cn.javak.pojo.RespBean;
 import cn.javak.service.CommentService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,7 +18,7 @@ import java.util.Date;
 @RestController
 @RequestMapping("/comment")
 public class CommentController {
-    @Autowired
+    @Reference
     private CommentService commentService;
 
     /**
