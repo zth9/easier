@@ -16,7 +16,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @MapperScan(basePackages = "cn.javak.mapper")
 public class EasierApplication extends SpringBootServletInitializer {
     public static void main(String[] args) {
-        SpringApplication.run(EasierApplication.class, args);
+        SpringApplication.run(EasierApplication.class, "--dubug");
     }
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {

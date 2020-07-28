@@ -8,6 +8,7 @@ import cn.javak.service.MailService;
 import cn.javak.service.UserService;
 import cn.javak.utils.Constants;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.dubbo.config.annotation.Reference;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -25,11 +26,11 @@ import org.springframework.stereotype.Component;
 @Aspect
 @Component
 public class CommentMail {
-    @Autowired
+    @Reference
     private UserService userService;
-    @Autowired
+    @Reference
     private BlogService blogService;
-    @Autowired
+    @Reference
     private MailService mailService;
     @Autowired
     private TaskExecutor taskExecutor;

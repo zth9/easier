@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @author: theTian
@@ -76,8 +77,9 @@ public class BlogController {
         List<Blog> select = blogService.select(rule);
         //增加点击量
         ServletContext context = request.getServletContext();
-        Integer clickNum = (Integer) context.getAttribute("clickNum");
-        context.setAttribute("clickNum", ++clickNum);
+        AtomicInteger clickNum = (AtomicInteger) context.getAttribute("clickNum");
+        clickNum.incrementAndGet();
+        context.setAttribute("clickNum", clickNum);
         return RespBean.ok("查询成功", select);
     }
 

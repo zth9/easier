@@ -15,6 +15,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @author: theTian
@@ -33,16 +34,16 @@ public class ContextController {
     @GetMapping("/clickNum")
     public RespBean getClickNum(HttpServletRequest request) {
         ServletContext context = request.getServletContext();
-        Integer clickNum = (Integer) context.getAttribute("clickNum");
+        AtomicInteger clickNum = (AtomicInteger) context.getAttribute("clickNum");
         Map<String, Integer> map = new HashMap<>();
-        map.put("clickNum", clickNum);
+        map.put("clickNum", clickNum.get());
         return RespBean.ok("获取网站点击量成功", map);
     }
 
     @PreDestroy
     public void destroy() {
-        Integer clickNum = (Integer) webApplicationConnect.getServletContext().getAttribute("clickNum");
-        contextMapper.updateClickNum(clickNum);
-        logger.info("更新点击量成功" + clickNum);
+        AtomicInteger clickNum = (AtomicInteger) webApplicationConnect.getServletContext().getAttribute("clickNum");
+        contextMapper.updateClickNum(clickNum.get());
+        logger.info("更新点击量成功" + clickNum.get());
     }
 }

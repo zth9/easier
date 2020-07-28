@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * 用于在网站加载前加载数据到{@link ServletContext}
@@ -24,11 +25,12 @@ public class MyWebListener implements ServletContextListener {
     public void contextInitialized(ServletContextEvent sce) {
         logger.info("项目初始化变量");
         ServletContext context = sce.getServletContext();
-        Integer clickNum = null;
+        AtomicInteger clickNum = null;
         try {
-            clickNum = contextMapper.selectClickNum();
+            clickNum = new AtomicInteger();
+            clickNum.set(contextMapper.selectClickNum());
             context.setAttribute("clickNum",clickNum);
-            logger.info("初始化网站点击量"+clickNum);
+            logger.info("初始化网站点击量"+clickNum.get());
         }catch (Exception e){
             logger.error("获取点击量失败", e);
         }
