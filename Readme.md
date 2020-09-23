@@ -10,7 +10,7 @@
 
 总技术栈：mysql+mybatis+spring+spring boot
 
-mysql：非关系型数据库
+mysql：关系型数据库
 
 mybatis：ORM框架，负责进行数据的CRUD
 
