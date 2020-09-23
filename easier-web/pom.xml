@@ -102,8 +102,8 @@
                     <port>8888</port> <!-- 访问端口-->
                     <path>/easier</path>    <!-- 访问路径-->
                     <!-- 热部署 -->
-                    <username>root</username>
-                    <password>zZ+411023</password>
+                    <username>username</username>
+                    <password>password</password>
                     <url>http://123.57.236.58:8080/manager/text</url>
                 </configuration>
             </plugin>
