@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -37,4 +38,6 @@ public interface UserService {
     RespBean updateAvatar(MultipartFile file, Integer tokenUserId) throws IOException;
 
     Set<String> getRoles(String username);
+
+    List<User> selectAllEmail();
 }
