@@ -1,13 +1,11 @@
 package cn.javak.schedule;
 
-import cn.javak.pojo.User;
 import cn.javak.pojo.Weather;
 import cn.javak.service.MailService;
 import cn.javak.service.UserService;
 import com.alibaba.fastjson.JSON;
+import jdk.nashorn.internal.ir.annotations.Reference;
 import org.apache.http.HttpEntity;
-import org.apache.http.ParseException;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -19,10 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -32,9 +28,9 @@ import java.util.regex.Pattern;
  */
 @Component
 public class WeatherSchedule {
-    @Autowired
+    @Reference
     private MailService mailService;
-    @Autowired
+    @Reference
     private UserService userService;
     @Autowired
     private TaskExecutor taskExecutor;

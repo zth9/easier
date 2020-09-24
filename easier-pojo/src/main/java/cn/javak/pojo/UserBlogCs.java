@@ -6,7 +6,7 @@ import java.io.Serializable;
  * user_blog_cs
  * @author 
  */
-public class UserBlogCs extends UserBlogCsKey {
+public class UserBlogCs extends UserBlogCsKey  implements Serializable{
     private Integer haveStar;
 
     private Integer haveCollection;

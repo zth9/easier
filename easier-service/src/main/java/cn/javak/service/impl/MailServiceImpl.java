@@ -3,7 +3,6 @@ package cn.javak.service.impl;
 import cn.javak.service.MailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.apache.dubbo.config.annotation.Service;
@@ -12,7 +11,7 @@ import org.apache.dubbo.config.annotation.Service;
  * @author: theTian
  * @date: 2020/6/12 15:59
  */
-@Service(timeout = 100000)
+@Service
 public class MailServiceImpl implements MailService {
 
     @Autowired

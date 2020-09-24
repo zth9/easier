@@ -1,10 +1,12 @@
 package cn.javak.utils;
 
+import java.io.Serializable;
+
 /**
  * @author: theTian
  * @date: 2020/6/30 15:51
  */
-public class Constants {
+public class Constants implements Serializable {
     /**
      * 网站链接地址
      */

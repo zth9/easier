@@ -8,8 +8,8 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <packaging>war</packaging>
     <artifactId>easier-web</artifactId>
+    <packaging>jar</packaging>
 
     <properties>
         <java.version>1.8</java.version>
@@ -20,16 +20,16 @@
             <groupId>cn.javak</groupId>
             <artifactId>easier-iservice</artifactId>
             <version>1.0-SNAPSHOT</version>
-            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.dubbo</groupId>
+            <artifactId>dubbo</artifactId>
+            <version>2.7.3</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
         <!--aop切面包-->
         <dependency>
@@ -55,6 +55,30 @@
             <artifactId>httpclient</artifactId>
             <version>4.5.12</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.apache.dubbo</groupId>
+            <artifactId>dubbo-spring-boot-starter</artifactId>
+            <version>2.7.3</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.curator</groupId>
+            <artifactId>curator-recipes</artifactId>
+            <version>2.8.0</version>
+        </dependency>
+
+        <!--jwt包-->
+        <dependency>
+            <groupId>com.auth0</groupId>
+            <artifactId>java-jwt</artifactId>
+            <version>3.5.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
@@ -71,18 +95,11 @@
         </resources>
         <plugins>
             <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <version>2.6</version>
                 <artifactId>maven-resources-plugin</artifactId>
                 <configuration>
                     <encoding>UTF-8</encoding>
-                    <nonFilteredFileExtensions>
-                        <nonFilteredFileExtension>xlsx</nonFilteredFileExtension>
-                    </nonFilteredFileExtensions>
                 </configuration>
             </plugin>
 
@@ -92,22 +109,10 @@
                 <configuration>
                     <!-- 没有该配置，devtools 不生效 -->
                     <fork>true</fork>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.tomcat.maven</groupId>
-                <artifactId>tomcat7-maven-plugin</artifactId>
-                <version>2.2</version>
-                <configuration>
-                    <port>8888</port> <!-- 访问端口-->
-                    <path>/easier</path>    <!-- 访问路径-->
-                    <!-- 热部署 -->
-                    <username>username</username>
-                    <password>password</password>
-                    <url>http://123.57.236.58:8080/manager/text</url>
+                    <!-- 可执行的jar -->
+                    <executable>true</executable>
                 </configuration>
             </plugin>
         </plugins>
-
     </build>
 </project>

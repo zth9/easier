@@ -1,7 +1,9 @@
 
 package cn.javak.pojo;
 
-public class Alarm {
+import java.io.Serializable;
+
+public class Alarm implements Serializable {
     private String alarm_type;
 
     private String alarm_level;

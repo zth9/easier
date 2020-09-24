@@ -5,6 +5,8 @@ import cn.javak.pojo.User;
 import cn.javak.service.BlogService;
 import cn.javak.service.UserService;
 import org.apache.dubbo.config.annotation.Reference;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +25,8 @@ public class UserIndexController {
     private UserService userService;
     @Reference
     private BlogService blogService;
+
+    private static Logger logger = LoggerFactory.getLogger(UserIndexController.class);
 
     @GetMapping("{userId}")
     public String goIndex(User user, Model model){
