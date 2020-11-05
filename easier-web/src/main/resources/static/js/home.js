@@ -287,5 +287,9 @@ $(function () {
 	loadBlogByHot = function () {
 		localStorage.setItem("rule", 2);
 		window.location.reload();
+	};
+	//玩猫
+	goCat = function () {
+		window.location.replace("/easier/cat.html");
 	}
 });
